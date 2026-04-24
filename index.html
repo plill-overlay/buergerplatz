@@ -2,20 +2,14 @@
 <!--
   Bürgerplatz
 
-  Was es nicht ist:
-    Keine Überwachung. Keine Empörung. Kein Tracking.
-    Kein Profil. Kein Algorithmus. Keine Konkurrenz.
-    Keine Reichweite. Keine Werbung. Kein Geschäftsmodell.
-    Keine Abhängigkeit.
+  Im Corporate Design des Landes Schleswig-Holstein:
+    SH Blau   #003064
+    SH Rot    #d4004b
+    SH Türkis #006173
+    SH Grau   #eaeeed
 
-  Was es ist:
-    Vertrauen. Freundlichkeit. Menschlich.
-    Nachbarschaft. Gleichberechtigt. Kooperation.
-    Öffentlichkeit. Gemeinwohl. Souveränität.
-    Unabhängigkeit.
-
-  Der Bürger ist nicht das Produkt.
-  Der Platz gehört den Bürgern.
+  Schrift: Inter (als lizenzfreier Ersatz für Museo Sans,
+  der offiziellen SH-Schrift).
 
   Eine Bürgerinitiative. Öffentliches Hosting gewünscht.
   In Schleswig-Holstein entwickelt.
@@ -26,12 +20,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#ffffff">
+<meta name="theme-color" content="#003064">
 <title>Bürgerplatz</title>
 <meta name="description" content="Bürgerplatz. Eine Bürgerinitiative. Öffentliches Hosting gewünscht. In Schleswig-Holstein entwickelt.">
 <meta property="og:title" content="Bürgerplatz">
 <meta property="og:description" content="Bürgerplatz. Eine Bürgerinitiative. Öffentliches Hosting gewünscht. In Schleswig-Holstein entwickelt.">
 <meta property="og:locale" content="de_DE">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
 
 <style>
 *, *::before, *::after {
@@ -41,13 +39,22 @@
 }
 
 :root {
-  --paper:      #ffffff;
-  --ink:        #0a0a0a;
-  --ink-soft:   #2a2a2a;
-  --ink-gold:   #d4a830;
-  --ink-blue:   #7aa5c3;
-  --ink-mute:   #8a9ba8;
-  --rule:       #e8e6e0;
+  /* Schleswig-Holstein Corporate Design */
+  --sh-blau:     #003064;
+  --sh-blau-alt: #006173;  /* Zusatzfarbe 2 — türkis */
+  --sh-rot:      #d4004b;
+  --sh-grau:     #eaeeed;  /* Zusatzfarbe 1 */
+  --sh-schwarz:  #000000;
+  --sh-weiss:    #ffffff;
+
+  /* Semantic */
+  --paper:       var(--sh-weiss);
+  --ink:         var(--sh-schwarz);
+  --ink-primary: var(--sh-blau);
+  --ink-accent:  var(--sh-rot);
+  --ink-soft:    #4a5668;
+  --ink-mute:    #7a8798;
+
   --vh: 100vh;
 }
 
@@ -61,7 +68,7 @@ html, body {
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: geometricPrecision;
@@ -125,8 +132,8 @@ body {
 }
 
 .hero-part-second {
-  color: var(--ink-gold);
-  -webkit-text-fill-color: var(--ink-gold);
+  color: var(--ink-accent);
+  -webkit-text-fill-color: var(--ink-accent);
 }
 
 .hero-break {
@@ -269,7 +276,7 @@ body {
   color: transparent;
   will-change: background-image;
 }
-.litany-head.is-ist { color: var(--ink-gold); }
+.litany-head.is-ist { color: var(--ink-accent); }
 
 .litany-list {
   list-style: none;
@@ -295,11 +302,10 @@ body {
 
 .litany-item.is-kein strong {
   font-weight: 800;
-  /* inherits the gradient via transparent fill from parent */
 }
 
 .litany-item.is-ist {
-  color: var(--ink-gold);
+  color: var(--ink-accent);
 }
 
 /* ─── Closing ─── */
@@ -330,7 +336,7 @@ body {
 
 .manifesto-close-accent {
   display: block;
-  color: var(--ink-gold);
+  color: var(--ink-accent);
   font-weight: 800;
 }
 
@@ -357,7 +363,6 @@ body {
   }
 }
 
-/* Primary: three statements, one per line on mobile, inline on desktop */
 .foot-primary {
   display: flex;
   flex-direction: column;
@@ -378,7 +383,6 @@ body {
   }
 }
 
-/* Impressum: always single-line on mobile (with wrap if needed) */
 .foot-impressum {
   color: var(--ink-mute);
   font-size: 9px;
@@ -397,7 +401,7 @@ body {
    ════════════════════════════════════════════════════════════════════ */
 
 ::selection {
-  background: var(--ink-gold);
+  background: var(--ink-accent);
   color: var(--paper);
 }
 
@@ -442,7 +446,7 @@ body {
 </section>
 
 <!-- ═══════════════════════════════════════════════════════════════════
-     MANIFESTO — 7 + 7 litany
+     MANIFESTO — 10 + 10 litany
      ═══════════════════════════════════════════════════════════════════ -->
 
 <section class="manifesto">
@@ -510,19 +514,18 @@ body {
 'use strict';
 
 /* ════════════════════════════════════════════════════════════════════
-   GRADIENT — Nordsee → Watt → Dünenrand
+   SCHLESWIG-HOLSTEIN GRADIENT
+   SH Blau → SH Türkis-Blau — staatliches Corporate Design
    ════════════════════════════════════════════════════════════════════ */
 
 const STOPS = [
-  '#1a4e8c 0%',
-  '#2f6fa8 13%',
-  '#5588b5 26%',
-  '#7fa5b8 40%',
-  '#a89e8a 52%',
-  '#c4a252 66%',
-  '#d4a830 78%',
-  '#e0b83a 90%',
-  '#e8c040 100%'
+  '#002050 0%',    /* deep SH blue shadow */
+  '#003064 18%',   /* SH Blau (official) */
+  '#003f7f 36%',   /* brighter SH blue */
+  '#00507f 54%',   /* transition */
+  '#006173 72%',   /* Zusatzfarbe 2 — türkis */
+  '#007a87 90%',   /* lighter variant */
+  '#008a95 100%'   /* brightest transition */
 ].join(', ');
 
 const hero = document.getElementById('hero');
@@ -616,7 +619,9 @@ if (!CSS.supports('height', '100dvh')) {
    ════════════════════════════════════════════════════════════════════ */
 
 console.log('%cBürgerplatz.',
-  'color:#d4a830;font-family:-apple-system,sans-serif;font-size:20px;font-weight:800;letter-spacing:-0.04em;');
+  'color:#003064;font-family:Inter,sans-serif;font-size:20px;font-weight:800;letter-spacing:-0.04em;');
+console.log('%cIm Design des Landes Schleswig-Holstein.',
+  'color:#d4004b;font-family:Inter,sans-serif;font-size:11px;font-weight:500;');
 
 })();
 </script>
