@@ -3,1538 +3,574 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Bürgerplatz · Human Interface Guidelines</title>
-<meta name="description" content="Die Bürgerplatz Human Interface Guidelines. Eine demokratische User-Interface-Grammatik in sechs Schichten: Foundations, Patterns, Components, Content, Accessibility, Anti-Patterns.">
+<title>Bürgerplatz · Öffentliche digitale Räume für Kommunen</title>
+<meta name="description" content="Bürgerplatz: ein Begriff für öffentliche digitale Räume der Kommunen. Für Alltag, Hilfe, Orientierung, Gemeinschaft und Vertrauen. Ohne Plattformlogik.">
 <style>
   :root {
     color-scheme: light;
-    --bg: #f5f5f7;
-    --bg-2: #fbfbfd;
-    --surface: rgba(255,255,255,.86);
-    --surface-solid: #ffffff;
-    --text: #1d1d1f;
-    --muted: #6e6e73;
-    --soft: #86868b;
-    --line: rgba(0,0,0,.10);
-    --line-strong: rgba(0,0,0,.18);
-    --blue: #0071e3;
-    --blue-2: #2997ff;
-    --blue-soft: #eaf4ff;
-    --cyan-soft: #e8f8ff;
-    --purple-soft: #f5efff;
-    --green: #248a3d;
-    --green-soft: #ecf8f0;
-    --orange: #bf5b00;
-    --orange-soft: #fff4e5;
-    --red: #c9342f;
-    --red-soft: #fff0ef;
-    --gold: #b08818;
-    --gold-soft: #fbf3df;
-    --shadow: 0 18px 50px rgba(0,0,0,.075);
-    --shadow-soft: 0 8px 24px rgba(0,0,0,.05);
-    --radius-xl: 34px;
-    --radius-lg: 24px;
-    --radius-md: 18px;
-    --radius-sm: 12px;
-    --max: 1120px;
-    --max-narrow: 820px;
+    --bg:#f5f5f7;
+    --surface:#fff;
+    --text:#1d1d1f;
+    --muted:#6e6e73;
+    --soft:#86868b;
+    --line:rgba(0,0,0,.10);
+    --blue:#0071e3;
+    --blueSoft:#eaf4ff;
+    --green:#248a3d;
+    --greenSoft:#ecf8f0;
+    --red:#c9342f;
+    --redSoft:#fff0ef;
+    --shadow:0 18px 50px rgba(0,0,0,.075);
+    --shadowSoft:0 8px 24px rgba(0,0,0,.05);
+    --rXL:34px;
+    --rLG:24px;
+    --max:1080px;
+    --narrow:800px;
   }
 
-  * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-
+  * { box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
   body {
-    margin: 0;
-    background: linear-gradient(180deg, #ffffff 0, var(--bg) 38%, #f1f1f4 100%);
-    color: var(--text);
-    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Avenir Next", Avenir, "Segoe UI", system-ui, sans-serif;
-    line-height: 1.55;
-    -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
+    margin:0;
+    color:var(--text);
+    background:linear-gradient(180deg,#fff 0,var(--bg) 44%,#f1f1f4 100%);
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Avenir Next",Avenir,"Segoe UI",system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+    line-height:1.55;
   }
+  a { color:inherit; text-decoration:none; }
 
-  a { color: inherit; text-decoration: none; }
-
-  /* ─── Header ─── */
   .site-header {
-    position: sticky;
-    top: 0;
-    z-index: 50;
-    border-bottom: 1px solid rgba(0,0,0,.06);
-    background: rgba(251,251,253,.82);
-    backdrop-filter: blur(24px) saturate(180%);
+    position:sticky;
+    top:0;
+    z-index:10;
+    background:rgba(251,251,253,.82);
+    backdrop-filter:blur(24px) saturate(180%);
+    border-bottom:1px solid rgba(0,0,0,.06);
   }
-
   .nav {
-    max-width: var(--max);
-    margin: 0 auto;
-    padding: 0 22px;
-    height: 56px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
+    max-width:var(--max);
+    margin:0 auto;
+    padding:0 22px;
+    height:56px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:18px;
   }
+  .brand { font-size:15px; font-weight:700; letter-spacing:-.005em; white-space:nowrap; }
+  .nav-links { display:none; gap:22px; color:var(--muted); font-size:13px; }
+  .nav-links a:hover { color:var(--text); }
 
-  .brand {
-    font-size: 15px;
-    font-weight: 700;
-    letter-spacing: -.005em;
-    white-space: nowrap;
-  }
-  .brand-sub { color: var(--muted); font-weight: 500; margin-left: 8px; }
+  .container { max-width:var(--max); margin:0 auto; padding:0 22px; }
+  .narrow { max-width:var(--narrow); margin:0 auto; padding:0 22px; }
+  section { padding:64px 0; }
 
-  .nav-links {
-    display: none;
-    gap: 22px;
-    color: var(--muted);
-    font-size: 13px;
-  }
-  .nav-links a:hover { color: var(--text); }
-
-  .container {
-    max-width: var(--max);
-    margin: 0 auto;
-    padding: 0 22px;
-  }
-  .container-narrow {
-    max-width: var(--max-narrow);
-    margin: 0 auto;
-    padding: 0 22px;
-  }
-
-  /* ─── Hero ─── */
-  .hero {
-    padding: 72px 0 48px;
-    text-align: center;
-  }
-
+  .hero { padding:78px 0 50px; text-align:center; }
   .eyebrow {
-    text-transform: uppercase;
-    letter-spacing: 0.16em;
-    font-size: 12px;
-    font-weight: 700;
-    color: var(--blue);
-    margin-bottom: 18px;
+    color:var(--blue);
+    font-size:13px;
+    font-weight:760;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    margin-bottom:18px;
+  }
+  h1 {
+    margin:0 auto;
+    max-width:980px;
+    font-size:clamp(52px,8vw,104px);
+    line-height:1.01;
+    letter-spacing:-.032em;
+    font-weight:760;
+  }
+  .lead {
+    margin:28px auto 0;
+    max-width:820px;
+    color:var(--muted);
+    font-size:clamp(21px,2.7vw,30px);
+    line-height:1.28;
+    letter-spacing:-.012em;
+    font-weight:500;
   }
 
-  .hero h1 {
-    font-size: clamp(40px, 7vw, 80px);
-    line-height: 1.04;
-    letter-spacing: -.04em;
-    margin: 0 auto;
-    max-width: 14ch;
-    font-weight: 760;
+  .definition {
+    margin-top:38px;
+    text-align:left;
+    background:linear-gradient(145deg,rgba(255,255,255,.97),rgba(246,250,255,.92));
+    border:1px solid var(--line);
+    border-radius:var(--rXL);
+    box-shadow:var(--shadow);
+    padding:clamp(28px,5vw,58px);
+  }
+  .definition h2 {
+    margin:0 0 16px;
+    max-width:930px;
+    font-size:clamp(30px,4.4vw,58px);
+    line-height:1.08;
+    letter-spacing:-.032em;
+  }
+  .definition p {
+    margin:0;
+    max-width:880px;
+    color:var(--muted);
+    font-size:clamp(18px,2vw,23px);
+    line-height:1.38;
   }
 
-  .hero .lead {
-    margin: 24px auto 0;
-    max-width: 640px;
-    color: var(--muted);
-    font-size: clamp(18px, 2.2vw, 22px);
-    line-height: 1.45;
-    letter-spacing: -.005em;
+  .pressbox {
+    margin-top:22px;
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:var(--rLG);
+    box-shadow:var(--shadowSoft);
+    padding:22px 24px;
+    text-align:left;
+  }
+  .pressbox small {
+    display:block;
+    color:var(--blue);
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:.12em;
+    font-weight:780;
+    margin-bottom:10px;
+  }
+  .pressbox p {
+    margin:0;
+    color:var(--text);
+    font-size:clamp(18px,2vw,22px);
+    line-height:1.38;
+    letter-spacing:-.01em;
   }
 
-  /* ─── Section base ─── */
-  section { padding: 56px 0; }
+  .quote {
+    margin-top:26px;
+    padding:22px 24px;
+    border-radius:var(--rLG);
+    background:#111113;
+    color:#fff;
+    box-shadow:var(--shadowSoft);
+    text-align:left;
+  }
+  .quote strong {
+    display:block;
+    max-width:890px;
+    font-size:clamp(24px,3.6vw,43px);
+    line-height:1.12;
+    letter-spacing:-.026em;
+  }
+  .quote span {
+    display:block;
+    margin-top:12px;
+    color:rgba(255,255,255,.68);
+    font-size:16px;
+  }
+
+  .pills { display:flex; flex-wrap:wrap; gap:10px; margin-top:24px; }
+  .pill {
+    padding:8px 13px;
+    border-radius:999px;
+    background:#fff;
+    border:1px solid var(--line);
+    color:var(--muted);
+    font-size:14px;
+    font-weight:720;
+  }
 
   .section-title {
-    font-size: clamp(32px, 5vw, 52px);
-    line-height: 1.06;
-    letter-spacing: -.03em;
-    margin: 0 auto 16px;
-    max-width: 18ch;
-    text-align: center;
-    font-weight: 760;
+    margin:0 auto 16px;
+    max-width:900px;
+    text-align:center;
+    font-size:clamp(34px,5vw,62px);
+    line-height:1.06;
+    letter-spacing:-.032em;
+    font-weight:760;
   }
-
   .section-lead {
-    max-width: 640px;
-    margin: 0 auto 40px;
-    color: var(--muted);
-    font-size: clamp(17px, 1.9vw, 20px);
-    line-height: 1.5;
-    text-align: center;
+    margin:0 auto 40px;
+    max-width:780px;
+    text-align:center;
+    color:var(--muted);
+    font-size:clamp(18px,2vw,22px);
+    line-height:1.45;
+  }
+  .kicker {
+    text-align:center;
+    text-transform:uppercase;
+    letter-spacing:.14em;
+    font-size:12px;
+    font-weight:760;
+    color:var(--muted);
+    margin-bottom:14px;
   }
 
-  .section-kicker {
-    text-align: center;
-    text-transform: uppercase;
-    letter-spacing: 0.16em;
-    font-size: 11px;
-    font-weight: 700;
-    color: var(--muted);
-    margin-bottom: 14px;
+  .grid2,.grid3 { display:grid; gap:14px; }
+  .card {
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:var(--rLG);
+    box-shadow:var(--shadowSoft);
+    padding:24px;
+  }
+  .card h3 { margin:0 0 9px; font-size:24px; line-height:1.12; letter-spacing:-.02em; }
+  .card p { margin:0; color:var(--muted); font-size:16px; line-height:1.52; }
+  .icon {
+    width:44px;
+    height:44px;
+    display:grid;
+    place-items:center;
+    border-radius:14px;
+    background:var(--blueSoft);
+    font-size:22px;
+    margin-bottom:18px;
   }
 
-  /* ─── Layer Grid (Six Layers Overview) ─── */
-  .layers {
-    display: grid;
-    gap: 14px;
+  .text-block {
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:var(--rXL);
+    box-shadow:var(--shadowSoft);
+    padding:clamp(28px,4vw,48px);
+  }
+  .text-block p {
+    margin:0 0 18px;
+    color:var(--muted);
+    font-size:clamp(18px,2vw,22px);
+    line-height:1.48;
+    letter-spacing:-.006em;
+  }
+  .text-block p:last-child { margin-bottom:0; }
+  .text-block strong { color:var(--text); }
+
+  .logic { display:grid; gap:14px; }
+  .logic-card {
+    overflow:hidden;
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:var(--rLG);
+    box-shadow:var(--shadowSoft);
+  }
+  .logic-head {
+    padding:18px 20px;
+    font-size:20px;
+    font-weight:760;
+    border-bottom:1px solid var(--line);
+  }
+  .logic-card.bad .logic-head { background:var(--redSoft); color:var(--red); }
+  .logic-card.good .logic-head { background:var(--greenSoft); color:var(--green); }
+  .logic-card ul { list-style:none; margin:0; padding:0; }
+  .logic-card li {
+    display:flex;
+    gap:12px;
+    padding:14px 20px;
+    border-bottom:1px solid rgba(0,0,0,.055);
+    color:var(--muted);
+    font-size:16px;
+  }
+  .logic-card li:last-child { border-bottom:0; }
+  .logic-card b { color:var(--text); min-width:112px; }
+
+  .rules {
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:var(--rLG);
+    overflow:hidden;
+    box-shadow:var(--shadowSoft);
+  }
+  .rule {
+    display:grid;
+    grid-template-columns:36px 1fr;
+    gap:14px;
+    padding:16px 20px;
+    border-bottom:1px solid var(--line);
+  }
+  .rule:last-child { border-bottom:0; }
+  .rule-num { color:var(--soft); font-weight:760; font-size:13px; padding-top:2px; }
+  .rule-text { font-size:16px; line-height:1.45; }
+
+  .movement {
+    text-align:center;
+    background:linear-gradient(135deg,#111113,#2b2b31);
+    color:#fff;
+    border-radius:var(--rXL);
+    box-shadow:var(--shadow);
+    padding:clamp(34px,6vw,74px);
+  }
+  .movement h2 {
+    margin:0 auto;
+    max-width:860px;
+    font-size:clamp(34px,5.4vw,70px);
+    line-height:1.05;
+    letter-spacing:-.036em;
+  }
+  .movement p {
+    margin:22px auto 0;
+    max-width:680px;
+    color:rgba(255,255,255,.72);
+    font-size:20px;
+    line-height:1.38;
   }
 
-  .layer {
-    display: grid;
-    grid-template-columns: 56px 1fr;
-    gap: 18px;
-    padding: 22px 24px;
-    border-radius: var(--radius-lg);
-    background: rgba(255,255,255,.94);
-    border: 1px solid var(--line);
-    box-shadow: var(--shadow-soft);
-    text-align: left;
+  .final {
+    text-align:center;
+    padding-bottom:72px;
+  }
+  .final h2 {
+    margin:0 auto;
+    max-width:880px;
+    font-size:clamp(36px,5.6vw,72px);
+    line-height:1.05;
+    letter-spacing:-.036em;
+  }
+  .final p {
+    margin:24px auto 0;
+    max-width:720px;
+    color:var(--muted);
+    font-size:21px;
+    line-height:1.38;
   }
 
-  .layer-num {
-    display: grid;
-    place-items: center;
-    width: 56px;
-    height: 56px;
-    border-radius: 18px;
-    background: var(--blue-soft);
-    color: var(--blue);
-    font-size: 16px;
-    font-weight: 850;
-    letter-spacing: -.01em;
-  }
-
-  .layer h3 {
-    margin: 0 0 4px;
-    font-size: 21px;
-    letter-spacing: -.015em;
-    font-weight: 700;
-  }
-  .layer p { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.5; }
-
-  /* ─── Foundations Block ─── */
-  .foundation-card {
-    background: rgba(255,255,255,.94);
-    border: 1px solid var(--line);
-    border-radius: var(--radius-xl);
-    padding: clamp(28px, 4vw, 56px);
-    box-shadow: var(--shadow);
-  }
-
-  .foundation-statement {
-    font-size: clamp(24px, 3vw, 34px);
-    line-height: 1.25;
-    letter-spacing: -.02em;
-    margin: 0 0 24px;
-    font-weight: 600;
-  }
-
-  .foundation-sub {
-    color: var(--muted);
-    font-size: 17px;
-    line-height: 1.6;
-    margin: 0;
-  }
-
-  /* ─── Pattern Card ─── */
-  .pattern {
-    background: #fff;
-    border: 1px solid var(--line);
-    border-radius: var(--radius-xl);
-    padding: clamp(24px, 3vw, 40px);
-    box-shadow: var(--shadow-soft);
-    margin-bottom: 18px;
-  }
-
-  .pattern-head {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    margin-bottom: 22px;
-    padding-bottom: 18px;
-    border-bottom: 1px solid var(--line);
-  }
-
-  .pattern-num {
-    display: grid;
-    place-items: center;
-    width: 44px;
-    height: 44px;
-    border-radius: 14px;
-    background: #f5f5f7;
-    color: var(--muted);
-    font-size: 13px;
-    font-weight: 850;
-    letter-spacing: 0.02em;
-  }
-
-  .pattern-head h3 {
-    margin: 0;
-    font-size: 24px;
-    font-weight: 700;
-    letter-spacing: -.02em;
-  }
-
-  .pattern-tagline {
-    margin: 4px 0 0;
-    color: var(--muted);
-    font-size: 14px;
-  }
-
-  .pattern-body {
-    display: grid;
-    gap: 24px;
-  }
-
-  .pattern-row {
-    display: grid;
-    gap: 8px;
-  }
-
-  .pattern-label {
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-    font-size: 11px;
-    font-weight: 700;
-    color: var(--muted);
-  }
-
-  .pattern-text {
-    margin: 0;
-    color: var(--text);
-    font-size: 16px;
-    line-height: 1.6;
-  }
-
-  .pattern-text.muted { color: var(--muted); }
-
-  .pattern-list {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    display: grid;
-    gap: 8px;
-  }
-
-  .pattern-list li {
-    display: grid;
-    grid-template-columns: 18px 1fr;
-    gap: 10px;
-    align-items: start;
-    color: var(--text);
-    font-size: 15px;
-    line-height: 1.5;
-  }
-
-  .pattern-list li::before {
-    content: "—";
-    color: var(--soft);
-  }
-
-  .pattern-quote {
-    background: var(--blue-soft);
-    color: var(--text);
-    padding: 16px 20px;
-    border-radius: var(--radius-md);
-    font-style: italic;
-    font-size: 16px;
-    line-height: 1.55;
-  }
-
-  .pattern-quote-source {
-    display: block;
-    margin-top: 8px;
-    font-style: normal;
-    color: var(--muted);
-    font-size: 13px;
-  }
-
-  /* ─── Component sample ─── */
-  .component-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    align-items: center;
-  }
-
-  .status-chip {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 13px;
-    font-weight: 750;
-    padding: 7px 12px;
-    border-radius: 999px;
-    background: #f5f5f7;
-    color: var(--muted);
-  }
-  .status-chip.open { background: var(--orange-soft); color: var(--orange); }
-  .status-chip.done { background: var(--green-soft); color: var(--green); }
-  .status-chip.found { background: var(--blue-soft); color: var(--blue); }
-  .status-chip.expiring { background: #f5f5f7; color: var(--muted); }
-  .status-chip.expired { background: #f5f5f7; color: var(--soft); opacity: 0.6; }
-
-  .emoji-sample-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-top: 12px;
-  }
-
-  .emoji-sample {
-    display: grid;
-    place-items: center;
-    width: 48px;
-    height: 48px;
-    border-radius: 14px;
-    background: #f5f5f7;
-    font-size: 24px;
-  }
-
-  /* ─── Voice / Tone table ─── */
-  .voice-grid {
-    display: grid;
-    gap: 14px;
-  }
-
-  .voice-row {
-    display: grid;
-    gap: 10px;
-    padding: 16px 18px;
-    border-radius: var(--radius-md);
-    border: 1px solid var(--line);
-    background: rgba(255,255,255,.94);
-  }
-
-  .voice-row .vlabel {
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-    font-size: 11px;
-    font-weight: 700;
-    color: var(--muted);
-  }
-
-  .voice-pair {
-    display: grid;
-    gap: 8px;
-  }
-
-  .voice-pair .v-bad {
-    color: var(--red);
-    font-size: 15px;
-    text-decoration: line-through;
-    text-decoration-color: rgba(201,52,47,0.4);
-  }
-  .voice-pair .v-good {
-    color: var(--green);
-    font-size: 15px;
-    font-weight: 600;
-  }
-
-  /* ─── Anti-Patterns ─── */
-  .antipattern {
-    background: #fff;
-    border: 1px solid var(--line);
-    border-left: 4px solid var(--red);
-    border-radius: var(--radius-md);
-    padding: 22px 24px;
-    margin-bottom: 12px;
-  }
-
-  .antipattern-head {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 12px;
-  }
-
-  .antipattern-num {
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    font-size: 11px;
-    font-weight: 700;
-    color: var(--red);
-    background: var(--red-soft);
-    padding: 4px 10px;
-    border-radius: 999px;
-  }
-
-  .antipattern-head h4 {
-    margin: 0;
-    font-size: 19px;
-    letter-spacing: -.012em;
-    font-weight: 700;
-  }
-
-  .antipattern-text { color: var(--text); margin: 0 0 8px; font-size: 15px; line-height: 1.55; }
-  .antipattern-text.muted { color: var(--muted); margin-top: 8px; }
-  .antipattern-because {
-    font-size: 14px;
-    color: var(--muted);
-    line-height: 1.55;
-    margin: 8px 0 0;
-  }
-  .antipattern-because strong { color: var(--text); font-weight: 700; }
-
-  /* ─── Reference examples ─── */
-  .examples {
-    display: grid;
-    gap: 18px;
-  }
-
-  .example-card {
-    background: #fff;
-    border: 1px solid var(--line);
-    border-radius: var(--radius-lg);
-    padding: 24px;
-    box-shadow: var(--shadow-soft);
-  }
-
-  .example-tag {
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-    font-size: 11px;
-    font-weight: 700;
-    color: var(--blue);
-    margin-bottom: 8px;
-  }
-
-  .example-card h3 { margin: 0 0 10px; font-size: 22px; letter-spacing: -.015em; font-weight: 700; }
-  .example-card p { color: var(--muted); margin: 0 0 14px; font-size: 15px; line-height: 1.55; }
-
-  .example-features {
-    display: grid;
-    gap: 6px;
-    font-size: 14px;
-    color: var(--text);
-  }
-
-  .example-features li {
-    display: grid;
-    grid-template-columns: 16px 1fr;
-    gap: 8px;
-    list-style: none;
-  }
-  .example-features li::before {
-    content: "✓";
-    color: var(--green);
-    font-weight: 800;
-  }
-
-  /* ─── Public Data Sources ─── */
-  .data-sources {
-    display: grid;
-    gap: 12px;
-  }
-  .data-source {
-    display: grid;
-    grid-template-columns: 80px 1fr;
-    gap: 18px;
-    align-items: center;
-    padding: 16px 20px;
-    border-radius: var(--radius-md);
-    background: rgba(255,255,255,.94);
-    border: 1px solid var(--line);
-  }
-  .data-source-tag {
-    font-size: 12px;
-    font-weight: 800;
-    color: var(--blue);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-  }
-  .data-source-name { font-weight: 700; font-size: 16px; margin: 0 0 2px; }
-  .data-source-desc { color: var(--muted); font-size: 14px; margin: 0; }
-
-  /* ─── Compliance Checklist ─── */
-  .compliance {
-    display: grid;
-    gap: 0;
-    background: #fff;
-    border-radius: var(--radius-lg);
-    border: 1px solid var(--line);
-    overflow: hidden;
-  }
-
-  .compliance-item {
-    display: grid;
-    grid-template-columns: 32px 1fr 100px;
-    gap: 16px;
-    padding: 16px 22px;
-    border-bottom: 1px solid var(--line);
-    align-items: center;
-  }
-  .compliance-item:last-child { border-bottom: none; }
-
-  .compliance-num {
-    font-variant-numeric: tabular-nums;
-    color: var(--soft);
-    font-size: 13px;
-    font-weight: 700;
-  }
-
-  .compliance-text {
-    font-size: 15px;
-    line-height: 1.5;
-    color: var(--text);
-  }
-
-  .compliance-state {
-    font-size: 12px;
-    font-weight: 750;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    text-align: right;
-  }
-  .compliance-state.required { color: var(--red); }
-  .compliance-state.recommended { color: var(--orange); }
-
-  /* ─── Quote Block ─── */
-  .quote-block {
-    background: linear-gradient(135deg, #111113, #2b2b31);
-    color: #fff;
-    border-radius: var(--radius-xl);
-    padding: clamp(40px, 6vw, 80px);
-    text-align: center;
-    box-shadow: var(--shadow);
-  }
-
-  .quote-block p {
-    margin: 0 auto;
-    max-width: 760px;
-    font-size: clamp(26px, 4vw, 44px);
-    line-height: 1.18;
-    letter-spacing: -.025em;
-    font-weight: 720;
-  }
-
-  .quote-block small {
-    display: block;
-    margin-top: 24px;
-    color: rgba(255,255,255,.65);
-    font-size: 16px;
-    line-height: 1.4;
-  }
-
-  /* ─── Footer ─── */
   footer {
-    border-top: 1px solid var(--line);
-    background: #f5f5f7;
-    padding: 36px 0 56px;
-    color: var(--muted);
-    font-size: 13px;
-    line-height: 1.6;
+    border-top:1px solid var(--line);
+    background:#f5f5f7;
+    padding:36px 0 56px;
+    color:var(--muted);
+    font-size:13px;
+    line-height:1.6;
   }
-  footer strong { color: var(--text); }
-  .footer-grid { display: grid; gap: 14px; }
+  footer strong { color:var(--text); }
+  .footer-grid { display:grid; gap:14px; }
 
-  /* ─── Responsive ─── */
-  @media (min-width: 740px) {
-    .nav-links { display: flex; }
-    .layers { grid-template-columns: repeat(2, minmax(0,1fr)); }
-    .pattern-body { grid-template-columns: repeat(2, minmax(0,1fr)); gap: 32px; }
-    .examples { grid-template-columns: repeat(2, minmax(0,1fr)); }
-    .voice-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
-    .footer-grid { grid-template-columns: 1fr auto; align-items: start; }
-  }
-
-  @media (min-width: 1020px) {
-    .layers { grid-template-columns: repeat(3, minmax(0,1fr)); }
-    .voice-grid { grid-template-columns: repeat(3, minmax(0,1fr)); }
-    section { padding: 80px 0; }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto; }
+  @media (min-width:740px) {
+    .nav-links { display:flex; }
+    .grid2 { grid-template-columns:repeat(2,minmax(0,1fr)); }
+    .grid3 { grid-template-columns:repeat(3,minmax(0,1fr)); }
+    .logic { grid-template-columns:repeat(2,minmax(0,1fr)); }
+    .footer-grid { grid-template-columns:1fr auto; align-items:start; }
   }
 </style>
 </head>
-
 <body>
 
-<header class="site-header">
-  <nav class="nav">
-    <div class="brand">Bürgerplatz<span class="brand-sub">· HIG</span></div>
-    <div class="nav-links">
-      <a href="#foundations">Foundations</a>
-      <a href="#patterns">Patterns</a>
-      <a href="#components">Components</a>
-      <a href="#content">Content</a>
-      <a href="#anti">Anti-Patterns</a>
-      <a href="#compliance">Compliance</a>
-    </div>
-  </nav>
-</header>
 
-<main>
-
-  <!-- ───────────────────────────────────────── HERO ─── -->
-  <section class="hero">
+<main id="top">
+  <section class="hero" id="definition">
     <div class="container">
-      <div class="eyebrow">Human Interface Guidelines · v1.0</div>
-      <h1>Eine demokratische Grammatik für Software.</h1>
-      <p class="lead">Diese Guidelines beschreiben, wie Bürgerplätze gebaut werden. Sie sind das Werkzeug, mit dem aus dem Begriff ein Standard wird — und aus dem Manifest eine Bauweise.</p>
+      <h1>Bürgerplatz.</h1>
+      <p class="lead">Der öffentliche digitale Raum für die Kommune.</p>
+
+      <div class="definition">
+        <h2>Ein Bürgerplatz ist ein öffentlicher digitaler Raum einer Kommune, in dem Menschen einander erreichen, lokale Anliegen sichtbar machen und am Alltag des Gemeinwesens teilnehmen können.</h2>
+        <p>Für Fund und Verlust. Für Hilfe. Für Vereine. Für lokale Betriebe. Für Veranstaltungen. Für Orientierung. Für Ankommen. Für den Raum vor dem Antrag.</p>
+        <div class="pills">
+          <span class="pill">ohne Nutzerkonto</span>
+          <span class="pill">ohne Tracking</span>
+          <span class="pill">ohne Werbung</span>
+          <span class="pill">ohne Likes</span>
+          <span class="pill">ohne Follower</span>
+          <span class="pill">ohne algorithmische Sichtbarkeit</span>
+        </div>
+      </div>
+
+      <div class="quote" aria-label="Zentraler Satz">
+        <strong>Alltagsinteraktionen schaffen Gemeinschaft. Gemeinschaft schafft Vertrauen. Vertrauen stärkt Demokratie.</strong>
+        <span>Darum kann ein öffentlicher digitaler Alltagsraum Demokratie fördern.</span>
+      </div>
     </div>
   </section>
 
-  <!-- ───────────────────────────────────────── ORIENTATION ─── -->
+  <section id="presse">
+    <div class="narrow">
+      <div class="kicker">Definition</div>
+      <h2 class="section-title">Der Begriff Bürgerplatz</h2>
+      <div class="pressbox">
+        <small>Kurzdefinition</small>
+        <p>Der Bürgerplatz ist ein neu vorgestellter Begriff für öffentliche digitale Räume der Kommunen. Er beschreibt eine digitale Alltagsöffentlichkeit, in der Bürgerinnen und Bürger, lokale Wirtschaft, Vereine, Initiativen und Nachbarschaften sichtbar werden und einander erreichen können, ohne von geschlossenen Gruppen oder Plattformlogiken abhängig zu sein.</p>
+      </div>
+      <div class="pressbox">
+        <small>Einordnung</small>
+        <p>Das Bürgerkonto ist für den Antrag. Der Bürgerplatz ist für den Alltag. Während das Bürgerkonto Verwaltungsverfahren digitalisiert, schafft der Bürgerplatz den öffentlichen digitalen Raum vor und neben dem Verfahren.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="schleswig-holstein">
+    <div class="narrow">
+      <div class="kicker">Zielbild</div>
+      <h2 class="section-title">Öffentliche digitale Räume in den Kommunen Schleswig-Holsteins.</h2>
+      <div class="text-block">
+        <p>Analog haben Kommunen öffentliche Räume: Dorfplätze, Gemeindehäuser, Bibliotheken, Märkte und Aushänge.</p>
+        <p>Digital fehlen solche Räume fast vollständig. Vieles, was öffentlich sein müsste, liegt heute in geschlossenen Gruppen oder privaten Plattformen.</p>
+        <p><strong>Der Bürgerplatz beschreibt, wie in Kommunen Schleswig-Holsteins öffentliche digitale Räume entstehen können: offen, ruhig, datensparsam, gemeinwohlorientiert und frei von Plattformpflicht. Er ist ein Aufruf, diesen Raum zu bauen.</strong></p>
+      </div>
+    </div>
+  </section>
+
   <section>
-    <div class="container-narrow">
-      <div class="foundation-card">
-        <p class="foundation-statement">
-          Software ist nicht neutral. Jede Oberfläche hat eine Grammatik. Diese Guidelines machen die Grammatik des Bürgerplatzes <strong>operationalisierbar</strong> — als Patterns, Components, Content-Regeln und Anti-Patterns, an denen sich jeder konkrete digitale Raum messen lassen muss.
-        </p>
-        <p class="foundation-sub">
-          Wer einen Bürgerplatz bauen will, hält sich an diese Guidelines. Wer sich nicht an sie hält, baut etwas anderes — vielleicht ein Portal, vielleicht eine Plattform, aber keinen Bürgerplatz.
-        </p>
+    <div class="narrow">
+      <div class="kicker">Wer ihn braucht</div>
+      <h2 class="section-title">Öffentlichkeit ohne Plattformpflicht.</h2>
+      <div class="text-block">
+        <p>Bürgerinnen und Bürger brauchen einen offenen, allgemein zugänglichen Ort, um einander im Alltag zu erreichen.</p>
+        <p>Lokale Wirtschaft braucht Sichtbarkeit, die nicht allein von Plattformlogiken abhängt.</p>
+        <p>Vereine, Initiativen und Nachbarschaften brauchen einen öffentlichen Raum, damit ihre Aktivitäten nicht in fragmentierten Teilöffentlichkeiten verschwinden.</p>
+        <p><strong>Die entscheidende Lücke der Digitalisierung liegt nicht im fehlenden Online-Formular, sondern im fehlenden öffentlichen Raum.</strong></p>
       </div>
     </div>
   </section>
 
-  <!-- ───────────────────────────────────────── SIX LAYERS ─── -->
-  <section>
-    <div class="container">
-      <div class="section-kicker">Architektur</div>
-      <h2 class="section-title">Sechs Schichten.</h2>
-      <p class="section-lead">Jede Bürgerplatz-Implementierung wird gegen sechs Schichten gemessen — von der Philosophie bis zur Compliance-Checkliste.</p>
-
-      <div class="layers">
-        <article class="layer">
-          <div class="layer-num">01</div>
-          <div>
-            <h3>Foundations</h3>
-            <p>Die philosophischen Grundsätze. Demokratische Begegnung statt Aufmerksamkeitsökonomie.</p>
-          </div>
-        </article>
-        <article class="layer">
-          <div class="layer-num">02</div>
-          <div>
-            <h3>Patterns</h3>
-            <p>Die wiederkehrenden Lösungen. Anliegen einstellen, suchen, antworten, vergessen.</p>
-          </div>
-        </article>
-        <article class="layer">
-          <div class="layer-num">03</div>
-          <div>
-            <h3>Components</h3>
-            <p>Die einzelnen Bausteine. Status-Chip, Kategorie-Wahl, Emoji-Vokabular, Trust-Badge.</p>
-          </div>
-        </article>
-        <article class="layer">
-          <div class="layer-num">04</div>
-          <div>
-            <h3>Content</h3>
-            <p>Voice und Tone. Wie der Bürgerplatz spricht — sachlich, lokal, ohne Plattform-Sprache.</p>
-          </div>
-        </article>
-        <article class="layer">
-          <div class="layer-num">05</div>
-          <div>
-            <h3>Accessibility</h3>
-            <p>Sprache, Tastatur, Screenreader, niedrige Bandbreite. Barrierefrei als Voraussetzung.</p>
-          </div>
-        </article>
-        <article class="layer">
-          <div class="layer-num">06</div>
-          <div>
-            <h3>Anti-Patterns</h3>
-            <p>Was niemals erlaubt ist — auch wenn die Bibliothek es technisch ermöglicht.</p>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- ───────────────────────────────────────── 1. FOUNDATIONS ─── -->
-  <section id="foundations">
-    <div class="container-narrow">
-      <div class="section-kicker">Schicht 01 · Foundations</div>
-      <h2 class="section-title">Die Grammatik beginnt mit Haltung.</h2>
-      <p class="section-lead">Bevor irgendein Pixel gesetzt wird: was glauben wir über Software und Demokratie?</p>
-
-      <div class="foundation-card" style="margin-bottom: 18px;">
-        <p class="pattern-label">Grundsatz 01</p>
-        <p class="foundation-statement" style="font-size: 22px;">Der Bürger ist der Zweck, nicht das Produkt.</p>
-        <p class="foundation-sub">Jede Designentscheidung wird daran gemessen, ob sie den Bürger zur Begegnung befähigt — nicht, ob sie seine Aufmerksamkeit verwertet.</p>
-      </div>
-
-      <div class="foundation-card" style="margin-bottom: 18px;">
-        <p class="pattern-label">Grundsatz 02</p>
-        <p class="foundation-statement" style="font-size: 22px;">Begrenzung schützt Freiheit.</p>
-        <p class="foundation-sub">Was die Oberfläche bewusst weglässt, ist genauso wichtig wie das, was sie ermöglicht. Likes, Profile, Reichweite — diese Dinge fehlen nicht, weil wir sie nicht bauen können. Sie fehlen, weil wir sie nicht bauen wollen.</p>
-      </div>
-
-      <div class="foundation-card" style="margin-bottom: 18px;">
-        <p class="pattern-label">Grundsatz 03</p>
-        <p class="foundation-statement" style="font-size: 22px;">Vorauswahl statt Freitext.</p>
-        <p class="foundation-sub">Wo immer möglich, bietet der Bürgerplatz strukturierte Auswahl statt Eingabefeld. Kategorien, Status, Ortsangaben, Emoji-Vokabular. Strukturierte Eingabe ist demokratisch — weil sie alle gleich behandelt und Eskalation strukturell verhindert.</p>
-      </div>
-
-      <div class="foundation-card" style="margin-bottom: 18px;">
-        <p class="pattern-label">Grundsatz 04</p>
-        <p class="foundation-statement" style="font-size: 22px;">Öffentliche Daten zuerst.</p>
-        <p class="foundation-sub">Wo öffentliche, verifizierte Datenquellen existieren — DWD, BSH, Fährbetreiber, Pressemitteilungen — werden sie genutzt. Sie ersetzen Spekulation, reduzieren Moderationsaufwand und liefern sofortigen Nutzen, auch ohne Nutzereinträge.</p>
-      </div>
-
-      <div class="foundation-card" style="margin-bottom: 18px;">
-        <p class="pattern-label">Grundsatz 05</p>
-        <p class="foundation-statement" style="font-size: 22px;">Bilder zur Wiedererkennung, nicht zur Selbstdarstellung.</p>
-        <p class="foundation-sub">Hochgeladene Bilder dienen ausschließlich der KI-gestützten Wiedererkennung — etwa beim Abgleich von Verlust und Fund. Sie werden nicht öffentlich angezeigt, nicht profiliert, nicht in Feeds eingebaut. Der Bürgerplatz ist kein Foto-Service.</p>
-      </div>
-
-      <div class="foundation-card">
-        <p class="pattern-label">Grundsatz 06</p>
-        <p class="foundation-statement" style="font-size: 22px;">Vergessen ist eine Funktion.</p>
-        <p class="foundation-sub">Jeder Eintrag hat ein Ablaufdatum. Der Raum vergisst von selbst. Kein Archiv ewiger Profile, keine Akkumulation, keine permanente Identitätskonstruktion.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ───────────────────────────────────────── 2. PATTERNS ─── -->
-  <section id="patterns">
-    <div class="container">
-      <div class="section-kicker">Schicht 02 · Patterns</div>
-      <h2 class="section-title">Wiederkehrende Lösungen.</h2>
-      <p class="section-lead">Sechs Patterns, an denen sich jede Bürgerplatz-Anwendung orientiert. Jedes Pattern hat dieselbe Struktur: Anatomie, wann verwenden, wann nicht, sprachliche Konvention, Anti-Pattern.</p>
-
-      <article class="pattern">
-        <div class="pattern-head">
-          <div class="pattern-num">01</div>
-          <div>
-            <h3>Anliegen einstellen</h3>
-            <p class="pattern-tagline">Strukturierte Vorauswahl statt freier Post.</p>
-          </div>
-        </div>
-        <div class="pattern-body">
-          <div class="pattern-row">
-            <div class="pattern-label">Anatomie</div>
-            <ul class="pattern-list">
-              <li>Schritt 1: Kategorie wählen (visuelle Emoji-Auswahl)</li>
-              <li>Schritt 2: Optional Bild für KI-Wiedererkennung hochladen</li>
-              <li>Schritt 3: Ort angeben (Karte oder Adresse)</li>
-              <li>Schritt 4: Kurze Beschreibung (max 280 Zeichen)</li>
-              <li>Schritt 5: Ablaufdatum bestätigen (Default je Kategorie)</li>
-              <li>Schritt 6: Anonymen Antwort-Token erhalten</li>
-            </ul>
-          </div>
-          <div class="pattern-row">
-            <div class="pattern-label">Wann verwenden</div>
-            <p class="pattern-text">Bei jedem konkreten Anliegen mit Lebenszyklus: Fundsache, Hilfegesuch, Veranstaltung, lokales Angebot, Vereinseinladung.</p>
-          </div>
-          <div class="pattern-row">
-            <div class="pattern-label">Wann nicht verwenden</div>
-            <p class="pattern-text muted">Für Diskussionen, Meinungsäußerungen, Bewertungen, persönliche Posts. Diese gehören nicht in einen Bürgerplatz.</p>
-          </div>
-          <div class="pattern-row">
-            <div class="pattern-label">Sprachliche Konvention</div>
-            <p class="pattern-text">Der Button heißt nicht <em>Posten</em>, sondern <em>Anliegen einstellen</em> oder <em>Sichtbar machen</em>. Die Bestätigungsnachricht heißt nicht <em>Beitrag erfolgreich veröffentlicht</em>, sondern <em>Ihr Anliegen ist sichtbar bis zum [Datum].</em></p>
-          </div>
-        </div>
-      </article>
-
-      <article class="pattern">
-        <div class="pattern-head">
-          <div class="pattern-num">02</div>
-          <div>
-            <h3>Suchen mit Sprache</h3>
-            <p class="pattern-tagline">Spracheingabe oder Text — beides geht ohne Konto.</p>
-          </div>
-        </div>
-        <div class="pattern-body">
-          <div class="pattern-row">
-            <div class="pattern-label">Anatomie</div>
-            <ul class="pattern-list">
-              <li>Mikrofon-Button als Primärweg, prominent positioniert</li>
-              <li>Texteingabe als gleichwertige Alternative, nicht Fallback</li>
-              <li>KI-gestützter Abgleich der Beschreibung mit eingestellten Anliegen</li>
-              <li>Treffer werden gleichberechtigt nach Aktualität und Nähe sortiert</li>
-              <li>Keine Personalisierung der Suchergebnisse, kein Verlauf</li>
-            </ul>
-          </div>
-          <div class="pattern-row">
-            <div class="pattern-label">Wann verwenden</div>
-            <p class="pattern-text">In jeder Such-Situation. Sprache ist besonders wichtig für ältere Nutzer und Menschen mit motorischen Einschränkungen.</p>
-          </div>
-          <div class="pattern-row">
-            <div class="pattern-label">Datenpolitik</div>
-            <p class="pattern-text">Sprachdaten werden lokal verarbeitet oder bei verifizierten öffentlichen Anbietern in der EU. Keine Sprachaufnahme verlässt den Verarbeitungskontext für andere Zwecke.</p>
-          </div>
-        </div>
-      </article>
-
-      <article class="pattern">
-        <div class="pattern-head">
-          <div class="pattern-num">03</div>
-          <div>
-            <h3>Antworten mit Token</h3>
-            <p class="pattern-tagline">Zweckgebundener Kontakt ohne öffentliche Bühne.</p>
-          </div>
-        </div>
-        <div class="pattern-body">
-          <div class="pattern-row">
-            <div class="pattern-label">Anatomie</div>
-            <ul class="pattern-list">
-              <li>Antwort-Button am Anliegen, nicht Kommentar-Feld</li>
-              <li>Antwort wird per E-Mail-Token oder anonymem Link zugestellt</li>
-              <li>Keine öffentliche Sichtbarkeit der Antwort</li>
-              <li>Keine Verlaufs-Anzeige &quot;Wie viele haben geantwortet&quot;</li>
-            </ul>
-          </div>
-          <div class="pattern-row">
-            <div class="pattern-label">Wann verwenden</div>
-            <p class="pattern-text">Standardweg für jede Reaktion auf ein Anliegen.</p>
-          </div>
-          <div class="pattern-row">
-            <div class="pattern-label">Wann nicht verwenden</div>
-            <p class="pattern-text muted">Niemals als öffentliche Diskussion. Niemals als Kommentarspalte unter dem Anliegen. Antworten sind privat zwischen Anliegensteller und Antwortendem.</p>
-          </div>
-        </div>
-      </article>
-
-      <article class="pattern">
-        <div class="pattern-head">
-          <div class="pattern-num">04</div>
-          <div>
-            <h3>Kategorisieren mit Emoji</h3>
-            <p class="pattern-tagline">Visuelles Vokabular als bewusste UI-Sprache.</p>
-          </div>
-        </div>
-        <div class="pattern-body">
-          <div class="pattern-row">
-            <div class="pattern-label">Anatomie</div>
-            <ul class="pattern-list">
-              <li>Kuratiertes, festes Emoji-Set pro Modul</li>
-              <li>Niemals freie Auswahl aus dem gesamten Unicode-Repertoire</li>
-              <li>Konsistente Verwendung über alle Ansichten</li>
-              <li>Begleitet von Textlabel, nicht ersetzend</li>
-            </ul>
-          </div>
-          <div class="pattern-row">
-            <div class="pattern-label">Beispiel · Fundbüro-Kategorien</div>
-            <div class="emoji-sample-row">
-              <span class="emoji-sample">👛</span>
-              <span class="emoji-sample">🎒</span>
-              <span class="emoji-sample">🧥</span>
-              <span class="emoji-sample">👟</span>
-              <span class="emoji-sample">👓</span>
-              <span class="emoji-sample">📱</span>
-              <span class="emoji-sample">🔑</span>
-              <span class="emoji-sample">⌚</span>
-              <span class="emoji-sample">🚲</span>
-              <span class="emoji-sample">☂️</span>
-              <span class="emoji-sample">💍</span>
-            </div>
-          </div>
-          <div class="pattern-row">
-            <div class="pattern-label">Begründung</div>
-            <p class="pattern-text">Emoji als kuratierte Kategoriensprache funktioniert sprachübergreifend, ist sofort verständlich, reduziert Lesezeit. Wichtig: Kein Emoji-Theater, keine Reaktions-Emojis, keine freie Eingabe von Emoji im Beschreibungstext über das vorgesehene Vokabular hinaus.</p>
-          </div>
-        </div>
-      </article>
-
-      <article class="pattern">
-        <div class="pattern-head">
-          <div class="pattern-num">05</div>
-          <div>
-            <h3>Status statt Likes</h3>
-            <p class="pattern-tagline">Lebenszyklus-Anzeige, keine Beliebtheitsanzeige.</p>
-          </div>
-        </div>
-        <div class="pattern-body">
-          <div class="pattern-row">
-            <div class="pattern-label">Beispielwerte</div>
-            <div class="component-row">
-              <span class="status-chip open">offen</span>
-              <span class="status-chip done">erledigt</span>
-              <span class="status-chip found">gefunden</span>
-              <span class="status-chip expiring">läuft heute ab</span>
-              <span class="status-chip expired">abgelaufen</span>
-            </div>
-          </div>
-          <div class="pattern-row">
-            <div class="pattern-label">Anatomie</div>
-            <ul class="pattern-list">
-              <li>Kapsel-Form, Border-Radius unendlich</li>
-              <li>Schriftgröße 13px, Gewicht 750</li>
-              <li>Maximal fünf Status pro Modul</li>
-              <li>Kategoriespezifische Farbe, niemals neutral grau für Aktion</li>
-            </ul>
-          </div>
-          <div class="pattern-row">
-            <div class="pattern-label">Niemals erlaubt</div>
-            <p class="pattern-text muted">Numerische Counter (5 hilfreich, 12 Reaktionen). Emoji-Reaktionen. Kommentar-Anzahl. Trending-Markierung.</p>
-          </div>
-        </div>
-      </article>
-
-      <article class="pattern">
-        <div class="pattern-head">
-          <div class="pattern-num">06</div>
-          <div>
-            <h3>Vergessen mit Ablaufdatum</h3>
-            <p class="pattern-tagline">Standardlebensdauer pro Kategorie.</p>
-          </div>
-        </div>
-        <div class="pattern-body">
-          <div class="pattern-row">
-            <div class="pattern-label">Default-Lebensdauer</div>
-            <ul class="pattern-list">
-              <li>Fundsachen: 14 Tage, dann gelöscht</li>
-              <li>Hilfegesuche: 7 Tage, dann gelöscht</li>
-              <li>Veranstaltungen: bis zum Datum + 1 Tag, dann archiviert</li>
-              <li>Vereinsinfos: 12 Monate, dann zur Pflege erinnert</li>
-              <li>Lokale Hinweise: 30 Tage, dann gelöscht</li>
-              <li>Live-Daten (Wetter, Tide, Fähre): kontinuierlich aktualisiert</li>
-            </ul>
-          </div>
-          <div class="pattern-row">
-            <div class="pattern-label">Sprachliche Konvention</div>
-            <p class="pattern-text">Statt <em>Eintrag wurde gelöscht</em> sagen wir <em>Dieser Eintrag hat seine Zeit gehabt.</em> Das ist menschlicher und macht Vergessen zu einer Funktion, nicht zu einem Defekt.</p>
-          </div>
-        </div>
-      </article>
-    </div>
-  </section>
-
-  <!-- ───────────────────────────────────────── 3. COMPONENTS ─── -->
-  <section id="components">
-    <div class="container">
-      <div class="section-kicker">Schicht 03 · Components</div>
-      <h2 class="section-title">Bausteine.</h2>
-      <p class="section-lead">Konkrete UI-Elemente. Hier nur die wichtigsten — die vollständige Component-Library wird mit der ersten Implementierung dokumentiert.</p>
-
-      <article class="pattern">
-        <div class="pattern-head">
-          <div class="pattern-num">3.1</div>
-          <div>
-            <h3>Trust-Badge</h3>
-            <p class="pattern-tagline">Sichtbare Vertrauenssignale ohne Marketing-Sprache.</p>
-          </div>
-        </div>
-        <div class="pattern-body">
-          <div class="pattern-row">
-            <div class="pattern-label">Anatomie</div>
-            <ul class="pattern-list">
-              <li>Kapsel-Form mit Häkchen-SVG, niemals Bild</li>
-              <li>Maximal drei Trust-Badges pro Ansicht</li>
-              <li>Nur verifizierbare Standards: <em>Datenschutzkonform</em>, <em>OZG / XÖV / FIT-Connect</em>, <em>Gehostet bei Dataport</em></li>
-              <li>Niemals Marketingclaims wie <em>Beste App</em> oder <em>Vertraue uns</em></li>
-            </ul>
-          </div>
-        </div>
-      </article>
-
-      <article class="pattern">
-        <div class="pattern-head">
-          <div class="pattern-num">3.2</div>
-          <div>
-            <h3>Action-Tile</h3>
-            <p class="pattern-tagline">Hauptaktionen als Karten mit Emoji-Wegweiser.</p>
-          </div>
-        </div>
-        <div class="pattern-body">
-          <div class="pattern-row">
-            <div class="pattern-label">Anatomie</div>
-            <ul class="pattern-list">
-              <li>Quadratische Emoji-Box links, 42×42 Pixel</li>
-              <li>Titel und kurze Erläuterung in der Mitte</li>
-              <li>Chevron rechts als Affordance</li>
-              <li>Hintergrund weiß, leichter Hover-Zustand</li>
-              <li>Niemals mehr als sechs Tiles pro Ansicht</li>
-            </ul>
-          </div>
-        </div>
-      </article>
-
-      <article class="pattern">
-        <div class="pattern-head">
-          <div class="pattern-num">3.3</div>
-          <div>
-            <h3>Mikrofon-Button</h3>
-            <p class="pattern-tagline">Sprache als Erstklasse-Eingabe.</p>
-          </div>
-        </div>
-        <div class="pattern-body">
-          <div class="pattern-row">
-            <div class="pattern-label">Anatomie</div>
-            <ul class="pattern-list">
-              <li>Runder Button, 80×80 Pixel auf Mobile, 100×100 auf Desktop</li>
-              <li>Zustände: <em>idle</em>, <em>listening</em>, <em>processing</em>, <em>error</em></li>
-              <li>Subtiles Pulse-Animation im listening-Zustand, prefers-reduced-motion respektiert</li>
-              <li>Klare Sprach-Indikator-Wellen während Aufnahme</li>
-              <li>Tippen-Label darunter: <em>Tippen um zu sprechen</em></li>
-            </ul>
-          </div>
-        </div>
-      </article>
-    </div>
-  </section>
-
-  <!-- ───────────────────────────────────────── 4. CONTENT ─── -->
-  <section id="content">
-    <div class="container">
-      <div class="section-kicker">Schicht 04 · Content</div>
-      <h2 class="section-title">Voice und Tone.</h2>
-      <p class="section-lead">Wie der Bürgerplatz spricht. Sprache ist Architektur. Falsche Wörter zerstören die Grammatik so sicher wie falsche Buttons.</p>
-
-      <div class="voice-grid">
-        <article class="voice-row">
-          <span class="vlabel">Button-Sprache</span>
-          <div class="voice-pair">
-            <div class="v-bad">Posten</div>
-            <div class="v-good">Anliegen einstellen</div>
-          </div>
-          <div class="voice-pair">
-            <div class="v-bad">Speichern</div>
-            <div class="v-good">Sichtbar machen</div>
-          </div>
-          <div class="voice-pair">
-            <div class="v-bad">Antworten</div>
-            <div class="v-good">Kontakt aufnehmen</div>
-          </div>
-        </article>
-
-        <article class="voice-row">
-          <span class="vlabel">Bestätigungen</span>
-          <div class="voice-pair">
-            <div class="v-bad">Beitrag erfolgreich veröffentlicht</div>
-            <div class="v-good">Ihr Anliegen ist sichtbar bis zum 14.05.</div>
-          </div>
-          <div class="voice-pair">
-            <div class="v-bad">Sie sind online</div>
-            <div class="v-good">Willkommen auf dem Bürgerplatz Föhr</div>
-          </div>
-        </article>
-
-        <article class="voice-row">
-          <span class="vlabel">Ablauf-Hinweise</span>
-          <div class="voice-pair">
-            <div class="v-bad">Eintrag wurde gelöscht</div>
-            <div class="v-good">Dieser Eintrag hat seine Zeit gehabt.</div>
-          </div>
-          <div class="voice-pair">
-            <div class="v-bad">Beitrag läuft ab in 2 Tagen</div>
-            <div class="v-good">Noch sichtbar bis Mittwoch</div>
-          </div>
-        </article>
-
-        <article class="voice-row">
-          <span class="vlabel">Personenrollen</span>
-          <div class="voice-pair">
-            <div class="v-bad">Nutzer · User · Mitglied</div>
-            <div class="v-good">Bürgerin · Bürger · Nachbarin</div>
-          </div>
-          <div class="voice-pair">
-            <div class="v-bad">Account · Profil · Konto</div>
-            <div class="v-good">Anliegen · Eintrag · Hinweis</div>
-          </div>
-        </article>
-
-        <article class="voice-row">
-          <span class="vlabel">Erfolg</span>
-          <div class="voice-pair">
-            <div class="v-bad">12 hilfreich</div>
-            <div class="v-good">erledigt</div>
-          </div>
-          <div class="voice-pair">
-            <div class="v-bad">Trending</div>
-            <div class="v-good">heute neu</div>
-          </div>
-        </article>
-
-        <article class="voice-row">
-          <span class="vlabel">Misserfolg</span>
-          <div class="voice-pair">
-            <div class="v-bad">Etwas ist schiefgelaufen</div>
-            <div class="v-good">Diese Aktion war nicht möglich. So geht es weiter: …</div>
-          </div>
-          <div class="voice-pair">
-            <div class="v-bad">404 Not Found</div>
-            <div class="v-good">Dieses Anliegen gibt es nicht mehr. Es hat seine Zeit gehabt.</div>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- ───────────────────────────────────────── DATA SOURCES ─── -->
   <section>
     <div class="container">
-      <div class="section-kicker">Datenstandards</div>
-      <h2 class="section-title">Öffentliche Daten zuerst.</h2>
-      <p class="section-lead">Ein Bürgerplatz lebt nicht von User-Generated-Content allein. Er nutzt verifizierte öffentliche Datenquellen — und reduziert dadurch Moderationsaufwand und Spekulation.</p>
-
-      <div class="data-sources">
-        <div class="data-source">
-          <span class="data-source-tag">DWD</span>
-          <div>
-            <p class="data-source-name">Deutscher Wetterdienst</p>
-            <p class="data-source-desc">Wetter, Pollenflug, Sturmwarnungen, Sichtweite. Open-Data-Schnittstelle, EU-konform.</p>
-          </div>
-        </div>
-        <div class="data-source">
-          <span class="data-source-tag">BSH</span>
-          <div>
-            <p class="data-source-name">Bundesamt für Seeschifffahrt und Hydrographie</p>
-            <p class="data-source-desc">Tide, Wassertemperatur, Sturmfluten. Lebenswichtig für Inselregionen.</p>
-          </div>
-        </div>
-        <div class="data-source">
-          <span class="data-source-tag">Fähre</span>
-          <div>
-            <p class="data-source-name">Fährbetreiber-Schnittstellen</p>
-            <p class="data-source-desc">Echtzeit-Fahrpläne, Verspätungen, Ausfälle. Direkt von der Quelle.</p>
-          </div>
-        </div>
-        <div class="data-source">
-          <span class="data-source-tag">ADSB</span>
-          <div>
-            <p class="data-source-name">Flug-Tracking</p>
-            <p class="data-source-desc">Inselverbindung Hamburg–Föhr–Sylt. Öffentliche Transponder-Daten.</p>
-          </div>
-        </div>
-        <div class="data-source">
-          <span class="data-source-tag">RSS</span>
-          <div>
-            <p class="data-source-name">Verifizierte lokale Verlage</p>
-            <p class="data-source-desc">SHZ, Föhrer Nachrichten, NDR, amtliche Pressemitteilungen. Kein Aggregator, keine Spekulation.</p>
-          </div>
-        </div>
-        <div class="data-source">
-          <span class="data-source-tag">iCal</span>
-          <div>
-            <p class="data-source-name">Veranstaltungskalender</p>
-            <p class="data-source-desc">Vereine, Museen, Kirchen, Kommune. Direkt von den Akteuren, nicht abgetippt.</p>
-          </div>
-        </div>
-        <div class="data-source">
-          <span class="data-source-tag">OSM</span>
-          <div>
-            <p class="data-source-name">OpenStreetMap</p>
-            <p class="data-source-desc">Karten, Adressen, Geo-Information. Offen, gemeinwohlorientiert, ohne Tracking.</p>
-          </div>
-        </div>
-        <div class="data-source">
-          <span class="data-source-tag">Sun</span>
-          <div>
-            <p class="data-source-name">Sonnenstand-API</p>
-            <p class="data-source-desc">Goldene Stunde, blaue Stunde, Sonnenauf- und untergang. Astronomisch berechnet, deterministisch.</p>
-          </div>
-        </div>
+      <div class="movement">
+        <h2>Bauen wir den öffentlichen digitalen Platz für Kommunen.</h2>
+        <p>Er existiert noch nicht als selbstverständliche Infrastruktur. Aber er kann entstehen: als offener Raum für Alltag, Hilfe, lokale Sichtbarkeit, Gemeinschaft und Vertrauen.</p>
       </div>
     </div>
   </section>
 
-  <!-- ───────────────────────────────────────── 5. ACCESSIBILITY ─── -->
   <section>
-    <div class="container-narrow">
-      <div class="section-kicker">Schicht 05 · Accessibility</div>
-      <h2 class="section-title">Barrierearmut ist Voraussetzung.</h2>
-      <p class="section-lead">Wer einen Bürgerplatz baut, baut für Ältere, Zugezogene, Menschen mit Behinderungen, Menschen mit niedriger Bandbreite, Menschen ohne Smartphone. Sonst ist es kein Bürgerplatz.</p>
-
-      <div class="foundation-card">
-        <p class="pattern-label">Mindestanforderungen</p>
-        <ul class="pattern-list" style="margin-top: 16px;">
-          <li>Vollständige Tastaturnavigation, ohne Maus</li>
-          <li>WCAG 2.2 AA als Minimum, AAA als Ziel</li>
-          <li>Alle Aktionen ohne JavaScript erreichbar (Progressive Enhancement)</li>
-          <li>Klare Fokus-Indikatoren mit hohem Kontrast</li>
-          <li>Spracheingabe als gleichwertige Eingabemethode</li>
-          <li>Bildbeschreibungen für KI-Bilderkennung, niemals Bilder ohne Alt-Text</li>
-          <li>prefers-reduced-motion respektieren</li>
-          <li>Funktionsfähigkeit ohne Cookies</li>
-          <li>Funktionsfähigkeit auf 3G-Bandbreite</li>
-          <li>Druckansicht für jeden Eintrag (Aushang am schwarzen Brett)</li>
-        </ul>
+    <div class="container">
+      <div class="kicker">Einordnung</div>
+      <h2 class="section-title">Bürgerkonto für den Antrag. Bürgerplatz für den Alltag.</h2>
+      <p class="section-lead">Das Bürgerkonto ist richtig und notwendig. Aber Demokratie besteht nicht nur aus Verfahren.</p>
+      <div class="grid3">
+        <article class="card">
+          <div class="icon">📄</div>
+          <h3>Bürgerkonto</h3>
+          <p>Dort weise ich mich aus. Dort stelle ich einen Antrag. Dort empfange ich einen Bescheid.</p>
+        </article>
+        <article class="card">
+          <div class="icon">🏛️</div>
+          <h3>Bürgerplatz</h3>
+          <p>Dort bin ich noch kein Vorgang. Ich suche Hilfe, finde etwas, lade ein oder orientiere mich im Ort.</p>
+        </article>
+        <article class="card">
+          <div class="icon">🤝</div>
+          <h3>Gemeinschaft</h3>
+          <p>Aus wiederholten kleinen Begegnungen entsteht Vertrauen. Aus Vertrauen entsteht demokratische Stabilität.</p>
+        </article>
       </div>
     </div>
   </section>
 
-  <!-- ───────────────────────────────────────── 6. ANTI-PATTERNS ─── -->
-  <section id="anti">
+  <section id="grammatik">
     <div class="container">
-      <div class="section-kicker">Schicht 06 · Anti-Patterns</div>
-      <h2 class="section-title">Was niemals erlaubt ist.</h2>
-      <p class="section-lead">Diese Muster sind in jeder Bürgerplatz-Implementierung verboten — auch wenn die verwendete Bibliothek sie technisch ermöglicht. Verstoß macht den Raum zu etwas anderem als einem Bürgerplatz.</p>
-
-      <article class="antipattern">
-        <div class="antipattern-head">
-          <span class="antipattern-num">Anti 01</span>
-          <h4>Likes, Reactions, Hearts</h4>
-        </div>
-        <p class="antipattern-text">Keine numerischen oder symbolischen Beliebtheitsanzeigen für Beiträge oder Einsteller.</p>
-        <p class="antipattern-because"><strong>Weil:</strong> Likes erzeugen Statuswettbewerb. Sie machen aus Begegnung Performance. Korrespondenz: Facebook, Instagram.</p>
-      </article>
-
-      <article class="antipattern">
-        <div class="antipattern-head">
-          <span class="antipattern-num">Anti 02</span>
-          <h4>Follower, Subscriptions, Connection-Counts</h4>
-        </div>
-        <p class="antipattern-text">Keine Möglichkeit, einer Person, einem Verein oder einem Betrieb dauerhaft zu folgen.</p>
-        <p class="antipattern-because"><strong>Weil:</strong> Follower erzeugen Hierarchie. Sie etablieren <em>Influencer</em> in einem Raum, in dem Gleichwürdigkeit gelten muss. Korrespondenz: Twitter, Instagram, LinkedIn.</p>
-      </article>
-
-      <article class="antipattern">
-        <div class="antipattern-head">
-          <span class="antipattern-num">Anti 03</span>
-          <h4>Ungelesen-Markierung bei Antworten</h4>
-        </div>
-        <p class="antipattern-text">Niemals anzeigen, ob der Empfänger eine Antwort gelesen hat oder nicht.</p>
-        <p class="antipattern-because"><strong>Weil:</strong> Lesebestätigungen erzeugen soziale Schuld und Erwartungsdruck. Sie machen aus einem Anliegen eine Verpflichtung. Korrespondenz: WhatsApp, Telegram.</p>
-      </article>
-
-      <article class="antipattern">
-        <div class="antipattern-head">
-          <span class="antipattern-num">Anti 04</span>
-          <h4>Endlos-Scroll und Auto-Refresh</h4>
-        </div>
-        <p class="antipattern-text">Listen haben endliche Länge. Niemals automatisches Nachladen oder periodische Aktualisierung.</p>
-        <p class="antipattern-because"><strong>Weil:</strong> Endlos-Scroll macht aus Suche eine Sucht. Korrespondenz: TikTok, Instagram-Feed, Twitter.</p>
-      </article>
-
-      <article class="antipattern">
-        <div class="antipattern-head">
-          <span class="antipattern-num">Anti 05</span>
-          <h4>Push-Notifications für neue Inhalte</h4>
-        </div>
-        <p class="antipattern-text">Push-Benachrichtigungen sind nur erlaubt für Antworten auf eigene Anliegen. Niemals für <em>Neue Anliegen in deiner Nähe</em>, <em>Trending</em>, <em>Vorgeschlagene Inhalte</em>.</p>
-        <p class="antipattern-because"><strong>Weil:</strong> Solche Pushes sind Aufmerksamkeitsdiebstahl. Sie machen aus einem Service einen Anrufer. Korrespondenz: alle Social-Media-Apps.</p>
-      </article>
-
-      <article class="antipattern">
-        <div class="antipattern-head">
-          <span class="antipattern-num">Anti 06</span>
-          <h4>Gamification</h4>
-        </div>
-        <p class="antipattern-text">Keine Punkte, Abzeichen, Streaks, Levels, Erfolgs-Animationen über das einfache Bestätigen einer Aktion hinaus.</p>
-        <p class="antipattern-because"><strong>Weil:</strong> Gamification verkauft Verhalten als Spiel. Demokratische Begegnung ist kein Spiel. Korrespondenz: Duolingo, Strava, Foursquare.</p>
-      </article>
-
-      <article class="antipattern">
-        <div class="antipattern-head">
-          <span class="antipattern-num">Anti 07</span>
-          <h4>Personalisierte Feeds und Empfehlungen</h4>
-        </div>
-        <p class="antipattern-text">Keine algorithmische Sortierung nach <em>Relevanz für dich</em>. Keine Empfehlungssysteme.</p>
-        <p class="antipattern-because"><strong>Weil:</strong> Personalisierung erfordert Profilbildung. Profilbildung verstößt gegen den Grundsatz der Datensparsamkeit. Korrespondenz: alle großen Plattformen.</p>
-      </article>
-
-      <article class="antipattern">
-        <div class="antipattern-head">
-          <span class="antipattern-num">Anti 08</span>
-          <h4>Bilder als Veröffentlichung</h4>
-        </div>
-        <p class="antipattern-text">Hochgeladene Bilder dienen ausschließlich der KI-Wiedererkennung. Sie werden niemals öffentlich angezeigt, niemals in Listen gezeigt, niemals geteilt.</p>
-        <p class="antipattern-because"><strong>Weil:</strong> Sobald Bilder öffentlich sind, beginnt die Performance-Logik. Korrespondenz: Instagram, Pinterest.</p>
-      </article>
-
-      <article class="antipattern">
-        <div class="antipattern-head">
-          <span class="antipattern-num">Anti 09</span>
-          <h4>Bezahlte Sichtbarkeit</h4>
-        </div>
-        <p class="antipattern-text">Niemals kostenpflichtige Hervorhebung, Sponsored-Listings, Promotion. Auch nicht für gemeinnützige Akteure.</p>
-        <p class="antipattern-because"><strong>Weil:</strong> Sobald Sichtbarkeit käuflich ist, verschwindet die Gleichwürdigkeit. Auch wenn nur die Feuerwehr zahlt — die Architektur ist ruiniert. Korrespondenz: Google Ads, Facebook Ads, Yelp.</p>
-      </article>
-
-      <article class="antipattern">
-        <div class="antipattern-head">
-          <span class="antipattern-num">Anti 10</span>
-          <h4>Öffentliche Kommentarspalten</h4>
-        </div>
-        <p class="antipattern-text">Keine offenen Kommentarbereiche unter Anliegen. Antworten sind privat zwischen den Beteiligten.</p>
-        <p class="antipattern-because"><strong>Weil:</strong> Offene Kommentarspalten verwandeln konkrete Anliegen in Meinungskämpfe. Sie bringen Eskalations-Mechanik in einen Raum, der sie verhindern soll. Korrespondenz: alle News-Sites, Reddit, YouTube.</p>
-      </article>
-    </div>
-  </section>
-
-  <!-- ───────────────────────────────────────── REFERENCES ─── -->
-  <section>
-    <div class="container">
-      <div class="section-kicker">Referenzimplementierungen</div>
-      <h2 class="section-title">Beispiele, die diese Guidelines erfüllen.</h2>
-      <p class="section-lead">Zwei Referenzimplementierungen zeigen, wie diese HIG in echte Software übersetzt wird.</p>
-
-      <div class="examples">
-        <article class="example-card">
-          <div class="example-tag">Modul · Fundbüro</div>
-          <h3>Fundbüro Föhr-Amrum</h3>
-          <p>Strukturierte Fundmeldung mit Emoji-Kategorien, optionaler KI-Bildwiedererkennung, ablaufenden Einträgen und privatem Kontakt. Vollständige Implementierung der HIG.</p>
-          <ul class="example-features">
-            <li>Vorauswahl statt Freitext</li>
-            <li>Emoji-Vokabular für 12 Kategorien</li>
-            <li>Bilder nur zum KI-Abgleich</li>
-            <li>Sprach- und Texteingabe</li>
-            <li>Status-Chips für Lebenszyklus</li>
-            <li>Trust-Badges für Datenschutz</li>
+      <div class="kicker">Die Regeln des Raums</div>
+      <h2 class="section-title">Bürger brauchen Ausdrucksmöglichkeiten, die demokratisches Miteinander fördern.</h2>
+      <p class="section-lead">Eine Oberfläche entscheidet, wie Menschen einander begegnen: als Nutzer, als Datenpunkte, als Gegner. Oder als Bürger.</p>
+      <div class="logic">
+        <article class="logic-card bad">
+          <div class="logic-head">Plattformlogik</div>
+          <ul>
+            <li><b>Form</b><span>Post, Bild, Kommentar</span></li>
+            <li><b>Signal</b><span>Like, Follower, Reichweite</span></li>
+            <li><b>Ordnung</b><span>Algorithmus</span></li>
+            <li><b>Ziel</b><span>Aufmerksamkeit</span></li>
+            <li><b>Wert</b><span>Daten und Verweildauer</span></li>
           </ul>
         </article>
-
-        <article class="example-card">
-          <div class="example-tag">Modul · Bürgerservice</div>
-          <h3>Bürgerservice Schleswig-Holstein</h3>
-          <p>Übersicht aller Bürgerplätze im Land, mit Wappen-SVG der Kommunen, Live-Daten, kuratierten Nachrichten und Sprachsuche. Demonstriert Skalierung der HIG auf Landesebene.</p>
-          <ul class="example-features">
-            <li>Föhrer Wappen als SVG-Vokabular</li>
-            <li>Live-Daten aus öffentlichen Quellen</li>
-            <li>Spracheingabe als Erstklasse-Eingabe</li>
-            <li>Notification-Center für eigene Anliegen</li>
-            <li>Mehrsprachige Kategorienauswahl</li>
-            <li>Erfolgs-Widget ohne Gamification</li>
+        <article class="logic-card good">
+          <div class="logic-head">Bürgerplatz-Grammatik</div>
+          <ul>
+            <li><b>Form</b><span>Anliegen, Ort, Zeit, Kategorie</span></li>
+            <li><b>Signal</b><span>offen, erledigt, gefunden</span></li>
+            <li><b>Ordnung</b><span>nachvollziehbare Regeln</span></li>
+            <li><b>Ziel</b><span>Hilfe und Orientierung</span></li>
+            <li><b>Wert</b><span>Vertrauen</span></li>
           </ul>
         </article>
       </div>
     </div>
   </section>
 
-  <!-- ───────────────────────────────────────── QUOTE ─── -->
+  <section id="regeln">
+    <div class="narrow">
+      <div class="kicker">Wann ist es ein Bürgerplatz?</div>
+      <h2 class="section-title">Ein Name reicht nicht. Die Regeln müssen stimmen.</h2>
+      <div class="rules">
+        <div class="rule"><span class="rule-num">01</span><span class="rule-text">Lesen, suchen und orientieren funktioniert ohne Nutzerkonto.</span></div>
+        <div class="rule"><span class="rule-num">02</span><span class="rule-text">Es gibt kein Tracking und keine Verhaltensprofile.</span></div>
+        <div class="rule"><span class="rule-num">03</span><span class="rule-text">Sichtbarkeit wird nicht verkauft. Es gibt keine Werbung.</span></div>
+        <div class="rule"><span class="rule-num">04</span><span class="rule-text">Es gibt keine Likes, Follower, Rankings oder Reichweitenwettbewerbe.</span></div>
+        <div class="rule"><span class="rule-num">05</span><span class="rule-text">Sichtbarkeit folgt Ort, Zeit, Kategorie und nachvollziehbaren Regeln.</span></div>
+        <div class="rule"><span class="rule-num">06</span><span class="rule-text">Einträge haben einen Zweck und verschwinden wieder, wenn ihre Zeit vorbei ist.</span></div>
+        <div class="rule"><span class="rule-num">07</span><span class="rule-text">Antworten sollen helfen, nicht eskalieren. Deshalb gibt es keine offene Kommentarspalte als Grundform.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="beispiele">
+    <div class="container">
+      <div class="kicker">Alltag</div>
+      <h2 class="section-title">Was dort sichtbar werden kann.</h2>
+      <p class="section-lead">Keine großen politischen Fragen. Sondern die kleinen Situationen, in denen Gemeinschaft und Vertrauen entstehen.</p>
+      <div class="grid3">
+        <article class="card">
+          <div class="icon">🔎</div>
+          <h3>Fund und Verlust</h3>
+          <p>Ein Handy wird gefunden. Die Meldung ist öffentlich sichtbar, ohne geschlossene Gruppe und ohne Anmeldung.</p>
+        </article>
+        <article class="card">
+          <div class="icon">🧡</div>
+          <h3>Hilfe</h3>
+          <p>Jemand braucht Unterstützung beim Einkaufen oder beim Formular. Andere können zweckgebunden helfen.</p>
+        </article>
+        <article class="card">
+          <div class="icon">🗓</div>
+          <h3>Vereine</h3>
+          <p>Ein Verein lädt ein, sucht Mitglieder oder informiert über Termine. Öffentlich sichtbar, ohne Plattformpflicht.</p>
+        </article>
+        <article class="card">
+          <div class="icon">🍽</div>
+          <h3>Lokale Betriebe</h3>
+          <p>Ein Gasthaus zeigt Öffnungszeiten oder Tageskarte. Ohne Bewertungssystem, Provision oder Datenhandel.</p>
+        </article>
+        <article class="card">
+          <div class="icon">📄</div>
+          <h3>Formularhilfe</h3>
+          <p>Vor dem Antrag steht oft eine Alltagssituation. Der Bürgerplatz macht Hilfe sichtbar, bevor ein Verfahren beginnt.</p>
+        </article>
+        <article class="card">
+          <div class="icon">🧭</div>
+          <h3>Orientierung</h3>
+          <p>Notdienste, Seelsorge, Tierhilfe, Mobilität, öffentliche Hinweise. Alles an einem öffentlichen digitalen Ort.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
   <section>
     <div class="container">
-      <blockquote class="quote-block">
-        <p>Die Grammatik des Bürgerplatzes ist nicht verhandelbar. Wer sie nicht erfüllt, baut etwas anderes.</p>
-        <small>Das ist die Bedingung, unter der das Wort <em>Bürgerplatz</em> seinen Sinn behält — wie das Wort <em>Bio</em> bei Lebensmitteln.</small>
-      </blockquote>
-    </div>
-  </section>
-
-  <!-- ───────────────────────────────────────── COMPLIANCE ─── -->
-  <section id="compliance">
-    <div class="container-narrow">
-      <div class="section-kicker">Compliance</div>
-      <h2 class="section-title">Die Prüfliste.</h2>
-      <p class="section-lead">Eine konkrete Software ist ein Bürgerplatz, wenn sie diese Punkte erfüllt. Dies ist die Compliance-Schicht der HIG.</p>
-
-      <div class="compliance">
-        <div class="compliance-item">
-          <span class="compliance-num">01</span>
-          <span class="compliance-text">Lesen, Suchen und Orientieren funktioniert ohne Nutzerkonto.</span>
-          <span class="compliance-state required">Pflicht</span>
-        </div>
-        <div class="compliance-item">
-          <span class="compliance-num">02</span>
-          <span class="compliance-text">Kein Tracking-Skript, keine Analytics von Drittanbietern.</span>
-          <span class="compliance-state required">Pflicht</span>
-        </div>
-        <div class="compliance-item">
-          <span class="compliance-num">03</span>
-          <span class="compliance-text">Keine Werbung, keine bezahlte Sichtbarkeit, kein Sponsored Content.</span>
-          <span class="compliance-state required">Pflicht</span>
-        </div>
-        <div class="compliance-item">
-          <span class="compliance-num">04</span>
-          <span class="compliance-text">Kein Algorithmus für personalisierte Sichtbarkeit.</span>
-          <span class="compliance-state required">Pflicht</span>
-        </div>
-        <div class="compliance-item">
-          <span class="compliance-num">05</span>
-          <span class="compliance-text">Keine Likes, Follower, Reactions, Rankings.</span>
-          <span class="compliance-state required">Pflicht</span>
-        </div>
-        <div class="compliance-item">
-          <span class="compliance-num">06</span>
-          <span class="compliance-text">Eingaben sind strukturiert: Kategorie, Ort, Zeit, Status statt Freitext-Posts.</span>
-          <span class="compliance-state required">Pflicht</span>
-        </div>
-        <div class="compliance-item">
-          <span class="compliance-num">07</span>
-          <span class="compliance-text">Jeder Eintrag hat ein Ablaufdatum.</span>
-          <span class="compliance-state required">Pflicht</span>
-        </div>
-        <div class="compliance-item">
-          <span class="compliance-num">08</span>
-          <span class="compliance-text">Hochgeladene Bilder werden nicht öffentlich gezeigt.</span>
-          <span class="compliance-state required">Pflicht</span>
-        </div>
-        <div class="compliance-item">
-          <span class="compliance-num">09</span>
-          <span class="compliance-text">Antworten zwischen Anliegensteller und Reagierendem sind privat, nicht öffentlich.</span>
-          <span class="compliance-state required">Pflicht</span>
-        </div>
-        <div class="compliance-item">
-          <span class="compliance-num">10</span>
-          <span class="compliance-text">WCAG 2.2 AA wird erfüllt.</span>
-          <span class="compliance-state required">Pflicht</span>
-        </div>
-        <div class="compliance-item">
-          <span class="compliance-num">11</span>
-          <span class="compliance-text">Spracheingabe ist als gleichwertige Eingabemethode verfügbar.</span>
-          <span class="compliance-state recommended">Empfohlen</span>
-        </div>
-        <div class="compliance-item">
-          <span class="compliance-num">12</span>
-          <span class="compliance-text">Hosting bei verifiziertem öffentlichem oder gemeinwohlorientiertem Anbieter in der EU.</span>
-          <span class="compliance-state required">Pflicht</span>
-        </div>
-        <div class="compliance-item">
-          <span class="compliance-num">13</span>
-          <span class="compliance-text">Quellcode wird der Trägerkommune und beauftragten Auditoren zur Prüfung übergeben.</span>
-          <span class="compliance-state required">Pflicht</span>
-        </div>
-        <div class="compliance-item">
-          <span class="compliance-num">14</span>
-          <span class="compliance-text">Push-Benachrichtigungen nur für Antworten auf eigene Anliegen.</span>
-          <span class="compliance-state required">Pflicht</span>
-        </div>
-        <div class="compliance-item">
-          <span class="compliance-num">15</span>
-          <span class="compliance-text">Verifizierte öffentliche Datenquellen werden bevorzugt vor User-Generated-Content.</span>
-          <span class="compliance-state recommended">Empfohlen</span>
-        </div>
-        <div class="compliance-item">
-          <span class="compliance-num">16</span>
-          <span class="compliance-text">Trust-Badges nur mit verifizierbaren, nicht mit Marketing-Behauptungen.</span>
-          <span class="compliance-state required">Pflicht</span>
-        </div>
-        <div class="compliance-item">
-          <span class="compliance-num">17</span>
-          <span class="compliance-text">Sprache der Oberfläche folgt der HIG-Voice-und-Tone: Bürger statt Nutzer, Anliegen statt Posts.</span>
-          <span class="compliance-state required">Pflicht</span>
-        </div>
-        <div class="compliance-item">
-          <span class="compliance-num">18</span>
-          <span class="compliance-text">Funktionsfähigkeit ohne JavaScript für Lesen und Suchen.</span>
-          <span class="compliance-state recommended">Empfohlen</span>
-        </div>
-        <div class="compliance-item">
-          <span class="compliance-num">19</span>
-          <span class="compliance-text">Druckansicht für jeden Eintrag (analoger Aushang).</span>
-          <span class="compliance-state recommended">Empfohlen</span>
-        </div>
-        <div class="compliance-item">
-          <span class="compliance-num">20</span>
-          <span class="compliance-text">Open-Standards für Datenexport (iCal für Veranstaltungen, GeoJSON für Orte).</span>
-          <span class="compliance-state recommended">Empfohlen</span>
-        </div>
+      <div class="movement">
+        <h2>Öffentliche digitale Räume machen Kommunen unabhängiger. Und Menschen sichtbarer füreinander.</h2>
+        <p>Der Bürgerplatz ist der Name für diesen Versuch: ein Raum, der sich gut anfühlt, weil er nicht verwertet, sondern verbindet.</p>
       </div>
-
-      <p class="section-lead" style="margin-top: 32px; max-width: 580px;">Die vollständige Compliance-Checkliste umfasst etwa 100 Punkte. Diese 20 sind die wichtigsten. Eine Software ist <strong>kein Bürgerplatz</strong>, wenn auch nur ein Pflicht-Punkt nicht erfüllt ist.</p>
     </div>
   </section>
 
-  <!-- ───────────────────────────────────────── FOOTER ─── -->
-  <section>
-    <div class="container-narrow" style="text-align: center;">
-      <h2 class="section-title">Bauen Sie nicht eine bessere Plattform.</h2>
-      <p class="section-lead">Bauen Sie etwas anderes. Etwas, das nicht Aufmerksamkeit, sondern Vertrauen optimiert. Diese Guidelines sind das Werkzeug.</p>
+  <section class="final">
+    <div class="container">
+      <h2>Der Bürgerplatz ist kein neues soziales Netzwerk.</h2>
+      <p>Er ist ein Begriff für öffentliche digitale Räume, in denen Alltag sichtbar wird, ohne Menschen zu Produkten zu machen.</p>
     </div>
   </section>
-
 </main>
 
 <footer>
   <div class="container footer-grid">
     <div>
-      <strong>Bürgerplatz HIG · v1.0</strong><br>
-      Eine demokratische Grammatik für Software<br>
-      Projektinitiative Bürgerplatz Föhr-Amrum<br>
-      <br>
-      JD Köhler · Boldixumerstraße 30 · 25938 Wyk auf Föhr
+      <strong>Impressum</strong><br>
+      JD Koehler<br>
+      Boldixumerstrasse 30<br>
+      25938 Wyk auf Föhr<br>
+      <a href="mailto:jkoehler@gmail.com">jkoehler@gmail.com</a>
     </div>
     <div>
-      Diese HIG ist ein lebendes Dokument.<br>
-      Vorschläge zur Erweiterung gehen<br>
-      an die Projektinitiative.<br>
-      <br>
-      <strong>buergerplatz.de</strong>
+      Bürgerplatz<br>
+      Begriff und Regeln für digitale Alltagsöffentlichkeit.
     </div>
   </div>
 </footer>
-
 </body>
 </html>
