@@ -9,21 +9,21 @@
   :root {
     color-scheme: light;
     --bg:#f5f5f7;
-    --surface:#fff;
+    --surface:#ffffff;
     --text:#1d1d1f;
     --muted:#6e6e73;
     --soft:#86868b;
     --line:rgba(0,0,0,.10);
     --blue:#0071e3;
-    --blueSoft:#eaf4ff;
-    --green:#248a3d;
-    --greenSoft:#ecf8f0;
-    --red:#c9342f;
-    --redSoft:#fff0ef;
-    --shadow:0 18px 50px rgba(0,0,0,.075);
-    --shadowSoft:0 8px 24px rgba(0,0,0,.05);
+    --blueSoft:#eef2f7;
+    --green:#34c759;
+    --greenSoft:#ecfbf1;
+    --red:#ff2d55;
+    --redSoft:#fff1f5;
+    --shadow:none;
+    --shadowSoft:none;
     --rXL:34px;
-    --rLG:24px;
+    --rLG:28px;
     --max:1080px;
     --narrow:800px;
   }
@@ -33,13 +33,14 @@
   body {
     margin:0;
     color:var(--text);
-    background:linear-gradient(180deg,#fff 0,var(--bg) 44%,#f1f1f4 100%);
+    background:#f5f5f7;
     font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Avenir Next",Avenir,"Segoe UI",system-ui,sans-serif;
     -webkit-font-smoothing:antialiased;
     text-rendering:optimizeLegibility;
     line-height:1.55;
   }
   a { color:inherit; text-decoration:none; }
+  .card a, footer a { color:#0066cc; }
 
   .site-header {
     position:sticky;
@@ -67,7 +68,7 @@
   .narrow { max-width:var(--narrow); margin:0 auto; padding:0 22px; }
   section { padding:64px 0; }
 
-  .hero { padding:78px 0 50px; text-align:center; }
+  .hero { padding:150px 0 82px; text-align:center; }
   .eyebrow {
     color:var(--blue);
     font-size:13px;
@@ -85,9 +86,9 @@
     font-weight:760;
   }
   .lead {
-    margin:28px auto 0;
+    margin:36px auto 0;
     max-width:820px;
-    color:var(--muted);
+    color:var(--text);
     font-size:clamp(21px,2.7vw,30px);
     line-height:1.28;
     letter-spacing:-.012em;
@@ -95,13 +96,20 @@
   }
 
   .definition {
-    margin-top:38px;
+    margin-top:82px;
     text-align:left;
-    background:linear-gradient(145deg,rgba(255,255,255,.97),rgba(246,250,255,.92));
-    border:1px solid var(--line);
+    overflow:hidden;
+    background:
+      linear-gradient(rgba(7,26,140,.16) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(7,26,140,.16) 1px, transparent 1px),
+      linear-gradient(45deg, transparent calc(50% - .7px), rgba(7,26,140,.14) calc(50% - .7px), rgba(7,26,140,.14) calc(50% + .7px), transparent calc(50% + .7px)),
+      linear-gradient(135deg,#5e7ce8,#2da8f4);
+    background-size:100% 120px, 120px 100%, 100% 100%, 100% 100%;
+    border:0;
     border-radius:var(--rXL);
-    box-shadow:var(--shadow);
-    padding:clamp(28px,5vw,58px);
+    box-shadow:none;
+    padding:clamp(38px,6vw,76px);
+    color:#071a8c;
   }
   .definition h2 {
     margin:0 0 16px;
@@ -113,7 +121,7 @@
   .definition p {
     margin:0;
     max-width:880px;
-    color:var(--muted);
+    color:rgba(7,26,140,.76);
     font-size:clamp(18px,2vw,23px);
     line-height:1.38;
   }
@@ -121,16 +129,16 @@
   .pressbox {
     margin-top:22px;
     background:#fff;
-    border:1px solid var(--line);
+    border:0;
     border-radius:var(--rLG);
-    box-shadow:var(--shadowSoft);
+    box-shadow:none;
     padding:22px 24px;
     text-align:left;
   }
   .pressbox small {
     display:block;
-    color:var(--blue);
-    font-size:12px;
+    color:#0066cc;
+    font-size:13px;
     text-transform:uppercase;
     letter-spacing:.12em;
     font-weight:780;
@@ -145,12 +153,12 @@
   }
 
   .quote {
-    margin-top:26px;
-    padding:22px 24px;
-    border-radius:var(--rLG);
-    background:#061B3A;
-    color:#fff;
-    box-shadow:var(--shadowSoft);
+    margin-top:28px;
+    padding:clamp(30px,4vw,48px);
+    border-radius:34px;
+    background:#fff;
+    color:var(--text);
+    box-shadow:none;
     text-align:left;
   }
   .quote strong {
@@ -163,7 +171,7 @@
   .quote span {
     display:block;
     margin-top:12px;
-    color:rgba(255,255,255,.68);
+    color:rgba(7,26,140,.72);
     font-size:16px;
   }
 
@@ -171,9 +179,9 @@
   .pill {
     padding:8px 13px;
     border-radius:999px;
-    background:#fff;
-    border:1px solid var(--line);
-    color:var(--muted);
+    background:rgba(7,26,140,.10);
+    border:0;
+    color:#071a8c;
     font-size:14px;
     font-weight:720;
   }
@@ -205,32 +213,42 @@
     margin-bottom:14px;
   }
 
-  .grid2,.grid3 { display:grid; gap:14px; }
+  .grid2,.grid3 { display:grid; gap:24px; }
   .card {
     background:#fff;
-    border:1px solid var(--line);
-    border-radius:var(--rLG);
-    box-shadow:var(--shadowSoft);
-    padding:24px;
+    border:0;
+    border-radius:28px;
+    box-shadow:none;
+    padding:44px;
+    min-height:300px;
   }
-  .card h3 { margin:0 0 9px; font-size:24px; line-height:1.12; letter-spacing:-.02em; }
-  .card p { margin:0; color:var(--muted); font-size:16px; line-height:1.52; }
+  .card h3 { margin:0 0 18px; font-size:28px; line-height:1.12; letter-spacing:-.02em; }
+  .card p { margin:0; color:var(--muted); font-size:22px; line-height:1.45; }
   .icon {
-    width:44px;
-    height:44px;
+    width:88px;
+    height:88px;
     display:grid;
     place-items:center;
-    border-radius:14px;
-    background:var(--blueSoft);
-    font-size:22px;
-    margin-bottom:18px;
+    border-radius:22px;
+    background:transparent;
+    color:#4aa3f0;
+    margin-bottom:28px;
+  }
+  .icon svg {
+    width:72px;
+    height:72px;
+    stroke:currentColor;
+    stroke-width:2.6;
+    fill:none;
+    stroke-linecap:round;
+    stroke-linejoin:round;
   }
 
   .text-block {
     background:#fff;
-    border:1px solid var(--line);
+    border:0;
     border-radius:var(--rXL);
-    box-shadow:var(--shadowSoft);
+    box-shadow:none;
     padding:clamp(28px,4vw,48px);
   }
   .text-block p {
@@ -247,9 +265,9 @@
   .logic-card {
     overflow:hidden;
     background:#fff;
-    border:1px solid var(--line);
+    border:0;
     border-radius:var(--rLG);
-    box-shadow:var(--shadowSoft);
+    box-shadow:none;
   }
   .logic-head {
     padding:18px 20px;
@@ -257,8 +275,8 @@
     font-weight:760;
     border-bottom:1px solid var(--line);
   }
-  .logic-card.bad .logic-head { background:var(--redSoft); color:var(--red); }
-  .logic-card.good .logic-head { background:var(--greenSoft); color:var(--green); }
+  .logic-card.bad .logic-head { background:#ff2d55; color:#fff; }
+  .logic-card.good .logic-head { background:#34c759; color:#063b16; }
   .logic-card ul { list-style:none; margin:0; padding:0; }
   .logic-card li {
     display:flex;
@@ -273,29 +291,36 @@
 
   .rules {
     background:#fff;
-    border:1px solid var(--line);
+    border:0;
     border-radius:var(--rLG);
     overflow:hidden;
-    box-shadow:var(--shadowSoft);
+    box-shadow:none;
   }
   .rule {
     display:grid;
-    grid-template-columns:36px 1fr;
+    grid-template-columns:72px 1fr;
     gap:14px;
     padding:16px 20px;
     border-bottom:1px solid var(--line);
   }
   .rule:last-child { border-bottom:0; }
-  .rule-num { color:var(--soft); font-weight:760; font-size:13px; padding-top:2px; }
+  .rule-num { color:var(--soft); font-weight:760; font-size:26px; line-height:1; padding-top:0; }
   .rule-text { font-size:16px; line-height:1.45; }
 
   .movement {
+    position:relative;
+    overflow:hidden;
     text-align:center;
-    background:linear-gradient(135deg,#061B3A,#0A3A75);
-    color:#fff;
+    background:
+      linear-gradient(rgba(7,26,140,.16) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(7,26,140,.16) 1px, transparent 1px),
+      linear-gradient(45deg, transparent calc(50% - .7px), rgba(7,26,140,.16) calc(50% - .7px), rgba(7,26,140,.16) calc(50% + .7px), transparent calc(50% + .7px)),
+      linear-gradient(135deg,#5e7ce8,#2da8f4);
+    background-size:100% 120px, 120px 100%, 100% 100%, 100% 100%;
+    color:#071a8c;
     border-radius:var(--rXL);
-    box-shadow:var(--shadow);
-    padding:clamp(34px,6vw,74px);
+    box-shadow:none;
+    padding:clamp(46px,7vw,96px);
   }
   .movement h2 {
     margin:0 auto;
@@ -307,7 +332,7 @@
   .movement p {
     margin:22px auto 0;
     max-width:680px;
-    color:rgba(255,255,255,.72);
+    color:rgba(7,26,140,.72);
     font-size:20px;
     line-height:1.38;
   }
@@ -349,6 +374,22 @@
     .logic { grid-template-columns:repeat(2,minmax(0,1fr)); }
     .footer-grid { grid-template-columns:1fr auto; align-items:start; }
   }
+
+  .movement {
+    background:
+      linear-gradient(rgba(7,26,140,.16) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(7,26,140,.16) 1px, transparent 1px),
+      linear-gradient(45deg, transparent calc(50% - .7px), rgba(7,26,140,.14) calc(50% - .7px), rgba(7,26,140,.14) calc(50% + .7px), transparent calc(50% + .7px)),
+      linear-gradient(135deg,#5e7ce8,#2da8f4);
+    background-size:100% 120px, 120px 100%, 100% 100%, 100% 100%;
+  }
+
+
+  .final .section-title, .final h2, .final p, .movement, .movement h2, .movement p { text-align:center; }
+  .hero h1, .hero .lead { margin-left:auto; margin-right:auto; }
+
+  h1, h2, .section-title { text-align:center; }
+
 </style>
 </head>
 <body>
@@ -362,7 +403,7 @@
 
       <div class="definition">
         <h2>Der digitale Bürgerplatz ist ein öffentlicher Raum einer Kommune, in dem Menschen einander erreichen, lokale Anliegen sichtbar machen und am Alltag des Gemeinwesens teilnehmen können.</h2>
-        <p>Für Fund und Verlust. Für Hilfe. Für Vereine. Für lokale Betriebe. Für Veranstaltungen. Für Orientierung. Für Ankommen. Für den Raum vor dem Antrag.</p>
+        <p>Für Fund und Verlust. Für Hilfe. Für Vereine. Für lokale Betriebe. Für Veranstaltungen. Für Orientierung. Für Ankommen. Für den Raum zwischen dem Amt und den privaten Plattformen.</p>
         <div class="pills">
           <span class="pill">ohne Nutzerkonto</span>
           <span class="pill">ohne Tracking</span>
@@ -375,34 +416,27 @@
 
       <div class="quote" aria-label="Zentraler Satz">
         <strong>Alltagsinteraktionen schaffen Gemeinschaft. Gemeinschaft schafft Vertrauen. Vertrauen stärkt Demokratie.</strong>
-        <span>Darum kann ein öffentlicher digitaler Alltagsraum Demokratie fördern.</span>
       </div>
     </div>
   </section>
 
   <section id="presse">
     <div class="narrow">
-      <div class="kicker">Definition</div>
-      <h2 class="section-title">Warum brauche ich den Bürgerplatz?</h2>
+            <h2 class="section-title">Warum brauche ich den Bürgerplatz?</h2>
       <div class="pressbox">
         <small>Antwort</small>
-        <p>Wenn wir uns die analoge Welt ansehen, finden wir dort Räume, die wir als selbstverständlich betrachten und deren demokratische Qualität wir selten ausdrücklich benennen: Räume, die allen gehören, die nicht der Logik der Profiterzielung unterworfen sind, die Begegnung ermöglichen, ohne sie zu strukturieren oder zu bewerten.</p>
+        <p>Wenn wir uns die analoge Welt ansehen, finden wir dort Räume, die wir als selbstverständlich betrachten und deren demokratische Qualität wir selten ausdrücklich benennen: Räume, die allen gehören, nicht der Logik der Profiterzielung unterworfen sind und Begegnung ermöglichen. Dort begegnen Menschen einander als Bürgerinnen und Bürger, nicht als Nutzer, Datenpunkte oder Wirtschaftsobjekte.</p>
       </div>
       <div class="pressbox">
         <small>Das fehlende Äquivalent</small>
         <p>Der Dorfplatz, der Stadtpark, das Gemeindehaus: Orte, an denen Menschen einander als Bürger begegnen, nicht als Nutzer, nicht als Datenpunkte. Die digitale Welt kennt ein solches Äquivalent bislang nicht.</p>
-      </div>
-      <div class="pressbox">
-        <small>Einordnung</small>
-        <p>Das Bürgerkonto ist für den Antrag. Der Bürgerplatz ist für den Alltag. Während das Bürgerkonto Verwaltungsverfahren digitalisiert, schafft der Bürgerplatz den öffentlichen digitalen Raum vor und neben dem Verfahren.</p>
       </div>
     </div>
   </section>
 
   <section id="schleswig-holstein">
     <div class="narrow">
-      <div class="kicker">Zielbild</div>
-      <h2 class="section-title">Was heißt Bürgerplatz in meiner Kommune?</h2>
+            <h2 class="section-title">Was heißt Bürgerplatz in meiner Kommune?</h2>
       <div class="text-block">
         <p>Analog haben Kommunen öffentliche Räume: Dorfplätze, Gemeindehäuser, Bibliotheken, Märkte und Aushänge.</p>
         <p>Digital fehlen solche Räume fast vollständig. Vieles, was öffentlich sein müsste, liegt heute in geschlossenen Gruppen oder privaten Plattformen.</p>
@@ -410,24 +444,34 @@
       </div>
     </div>
   </section>
-
-  <section>
-    <div class="narrow">
-      <div class="kicker">Wer ihn braucht</div>
-      <h2 class="section-title">Wer braucht den Bürgerplatz?</h2>
-      <div class="text-block">
-        <p>Bürgerinnen und Bürger brauchen einen offenen, allgemein zugänglichen Ort, um einander im Alltag zu erreichen.</p>
-        <p>Lokale Wirtschaft braucht Sichtbarkeit, die nicht allein von Plattformlogiken abhängt.</p>
-        <p>Vereine, Initiativen und Nachbarschaften brauchen einen öffentlichen Raum, damit ihre Aktivitäten nicht in fragmentierten Teilöffentlichkeiten verschwinden.</p>
-        <p><strong>Die entscheidende Lücke der Digitalisierung liegt nicht im fehlenden Online-Formular, sondern im fehlenden öffentlichen Raum.</strong></p>
+  <section id="fehlt">
+    <div class="container">
+      <h2 class="section-title">Was fehlt ohne den Bürgerplatz?</h2>
+      <p class="section-lead">Es fehlen nicht noch mehr Funktionen. Es fehlt ein öffentlicher Ort, an dem alltägliche Anliegen sichtbar werden können.</p>
+      <div class="grid3">
+        <article class="card">
+          <div class="icon"><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="28" cy="28" r="16"/><path d="M40 40l12 12"/></svg></div>
+          <h3>Etwas gefunden. Etwas verloren.</h3>
+          <p>Wenn am Strand ein iPhone auftaucht, landet die Fundmeldung heute oft in einer geschlossenen Gruppe. Sie erreicht nur, wer zufällig Mitglied ist. Der Gast, der in drei Tagen abreist, erfährt es vielleicht nie. Was allen helfen sollte, bleibt in einem Teilraum verborgen.</p>
+        </article>
+        <article class="card">
+          <div class="icon"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M14 28h36l-4-12H18l-4 12z"/><path d="M18 28v24h28V28"/><path d="M26 52V38h12v14"/></svg></div>
+          <h3>Ein Gasthaus, das gefunden werden will.</h3>
+          <p>Lokale Betriebe sind für Sichtbarkeit oft auf Plattformen angewiesen. Die Tageskarte steht auf Instagram, die Öffnungszeiten bei Google, die Empfehlung in einer App. Was für das Gasthaus gilt, gilt auch für Handwerk, Läden, Vereine und Initiativen.</p>
+        </article>
+        <article class="card">
+          <div class="icon"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M32 51S14 40.5 14 26a10 10 0 0 1 18-6 10 10 0 0 1 18 6c0 14.5-18 25-18 25z"/></svg></div>
+          <h3>Ein stiller Nachbar.</h3>
+          <p>„Ich brauche diese Woche Hilfe beim Einkaufen.“ Mehr müsste nicht dort stehen. Kein Profil. Keine Mitgliedschaft. Eine Nachbarin drei Häuser weiter liest es und antwortet. So entstand früher Dorfgemeinschaft. Digital fehlt dafür oft der öffentliche Ort.</p>
+        </article>
       </div>
     </div>
   </section>
 
-  <section>
+<section>
     <div class="container">
       <div class="movement">
-        <h2>Bauen wir den öffentlichen digitalen Platz für Kommunen.</h2>
+        <h2>Bauen wir den öffentlichen digitalen Platz für Ihre Kommune.</h2>
         <p>Er existiert noch nicht als selbstverständliche Infrastruktur. Aber er kann entstehen: als offener Raum für Alltag, Hilfe, lokale Sichtbarkeit, Gemeinschaft und Vertrauen.</p>
       </div>
     </div>
@@ -435,58 +479,30 @@
 
   <section>
     <div class="container">
-      <div class="kicker">Einordnung</div>
-      <h2 class="section-title">Was bringt ein Bürgerplatz?</h2>
-      <p class="section-lead">Das Bürgerkonto ist richtig und notwendig. Aber Demokratie besteht nicht nur aus Verfahren.</p>
+            <h2 class="section-title">Wie passt der Bürgerplatz in die digitale Landschaft?</h2>
+      <p class="section-lead">Bürgerplatz für den Alltag. Bürgerkonto für den Antrag. Private Plattformen für die Wirtschaft.</p>
       <div class="grid3">
         <article class="card">
-          <div class="icon">📄</div>
+          <div class="icon"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M20 10h18l10 10v34H20V10z"/><path d="M38 10v12h10"/><path d="M26 32h16M26 40h16"/></svg></div>
           <h3>Bürgerkonto</h3>
           <p>Dort weise ich mich aus. Dort stelle ich einen Antrag. Dort empfange ich einen Bescheid.</p>
         </article>
         <article class="card">
-          <div class="icon">🏛️</div>
+          <div class="icon"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M12 48h40"/><path d="M18 48V26l14-10 14 10v22"/><path d="M26 48V34h12v14"/></svg></div>
           <h3>Bürgerplatz</h3>
           <p>Dort bin ich noch kein Vorgang. Ich suche Hilfe, finde etwas, lade ein oder orientiere mich im Ort.</p>
         </article>
         <article class="card">
-          <div class="icon">🤝</div>
-          <h3>Gemeinschaft</h3>
-          <p>Aus wiederholten kleinen Begegnungen entsteht Vertrauen. Aus Vertrauen entsteht demokratische Stabilität.</p>
+          <div class="icon"><svg viewBox="0 0 64 64" aria-hidden="true"><rect x="14" y="16" width="36" height="28" rx="5"/><path d="M22 52h20M32 44v8"/><path d="M22 25h20M22 33h12"/></svg></div>
+          <h3>Private Plattformen</h3>
+          <p>Private Plattformen, Bürgerdienste und Fachverfahren bleiben wichtig. Der Bürgerplatz ergänzt sie um den öffentlichen Raum der Kommune.</p>
         </article>
       </div>
     </div>
   </section>
-
-  <section id="nutzen">
+<section id="grammatik">
     <div class="container">
-      <div class="kicker">Nutzung</div>
-      <h2 class="section-title">Wer kann den Bürgerplatz nutzen?</h2>
-      <p class="section-lead">Alle, die im Alltag einer Kommune sichtbar werden, etwas finden, beitragen oder erreichen wollen.</p>
-      <div class="grid3">
-        <article class="card">
-          <div class="icon">👥</div>
-          <h3>Bürgerinnen und Bürger</h3>
-          <p>Für Hilfe, Fund und Verlust, Orientierung, Formularhilfe, Nachbarschaft und Teilnahme am Leben vor Ort.</p>
-        </article>
-        <article class="card">
-          <div class="icon">🏪</div>
-          <h3>Lokale Wirtschaft</h3>
-          <p>Für Öffnungszeiten, Tageskarten, freie Plätze, Aushilfen und lokale Sichtbarkeit ohne Bewertungs- und Werbelogik.</p>
-        </article>
-        <article class="card">
-          <div class="icon">🌱</div>
-          <h3>Vereine und Initiativen</h3>
-          <p>Für Termine, Einladungen, Ehrenamt, neue Mitglieder und alles, was Gemeinschaft sichtbar macht.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section id="grammatik">
-    <div class="container">
-      <div class="kicker">Die Regeln des Raums</div>
-      <h2 class="section-title">Welche Ausdrucksmöglichkeiten brauchen Bürger?</h2>
+            <h2 class="section-title">Welche Ausdrucksmöglichkeiten braucht ein Bürgerplatz?</h2>
       <p class="section-lead">Eine Oberfläche entscheidet, wie Menschen einander begegnen: als Nutzer, als Datenpunkte, als Gegner. Oder als Bürger.</p>
       <div class="logic">
         <article class="logic-card bad">
@@ -515,8 +531,8 @@
 
   <section id="regeln">
     <div class="narrow">
-      <div class="kicker">Wann ist es ein Bürgerplatz?</div>
-      <h2 class="section-title">Software entlang demokratischer Regeln bauen</h2>
+      <div class="kicker">Welche Eigenschaften machen einen Platz zum Bürgerplatz?</div>
+      <h2 class="section-title">Software entlang demokratischer Regeln</h2>
       <div class="rules">
         <div class="rule"><span class="rule-num">01</span><span class="rule-text">Lesen, suchen und orientieren funktioniert ohne Nutzerkonto.</span></div>
         <div class="rule"><span class="rule-num">02</span><span class="rule-text">Es gibt kein Tracking und keine Verhaltensprofile.</span></div>
@@ -531,37 +547,36 @@
 
   <section id="beispiele">
     <div class="container">
-      <div class="kicker">Alltag</div>
-      <h2 class="section-title">Was kann dort sichtbar werden?</h2>
+            <h2 class="section-title">Was kann dort sichtbar werden?</h2>
       <p class="section-lead">Keine großen politischen Fragen. Sondern die kleinen Situationen, in denen Gemeinschaft und Vertrauen entstehen.</p>
       <div class="grid3">
         <article class="card">
-          <div class="icon">🔎</div>
+          <div class="icon"><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="28" cy="28" r="16"/><path d="M40 40l12 12"/></svg></div>
           <h3>Fund und Verlust</h3>
           <p>Ein Handy wird gefunden. Die Meldung ist öffentlich sichtbar, ohne geschlossene Gruppe und ohne Anmeldung.</p>
         </article>
         <article class="card">
-          <div class="icon">🧡</div>
+          <div class="icon"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M32 51S14 40.5 14 26a10 10 0 0 1 18-6 10 10 0 0 1 18 6c0 14.5-18 25-18 25z"/></svg></div>
           <h3>Hilfe</h3>
           <p>Jemand braucht Unterstützung beim Einkaufen oder beim Formular. Andere können zweckgebunden helfen.</p>
         </article>
         <article class="card">
-          <div class="icon">🗓</div>
+          <div class="icon"><svg viewBox="0 0 64 64" aria-hidden="true"><rect x="14" y="16" width="36" height="34" rx="5"/><path d="M22 10v10M42 10v10M14 26h36"/><path d="M23 35h6M35 35h6M23 43h6"/></svg></div>
           <h3>Vereine</h3>
           <p>Ein Verein lädt ein, sucht Mitglieder oder informiert über Termine. Öffentlich sichtbar, ohne Plattformpflicht.</p>
         </article>
         <article class="card">
-          <div class="icon">🍽</div>
+          <div class="icon"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M14 28h36l-4-12H18l-4 12z"/><path d="M18 28v24h28V28"/><path d="M26 52V38h12v14"/></svg></div>
           <h3>Lokale Betriebe</h3>
           <p>Ein Gasthaus zeigt Öffnungszeiten oder Tageskarte. Ohne Bewertungssystem, Provision oder Datenhandel.</p>
         </article>
         <article class="card">
-          <div class="icon">📄</div>
+          <div class="icon"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M20 10h18l10 10v34H20V10z"/><path d="M38 10v12h10"/><path d="M26 32h16M26 40h16"/></svg></div>
           <h3>Formularhilfe</h3>
           <p>Vor dem Antrag steht oft eine Alltagssituation. Der Bürgerplatz macht Hilfe sichtbar, bevor ein Verfahren beginnt.</p>
         </article>
         <article class="card">
-          <div class="icon">🧭</div>
+          <div class="icon"><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="22"/><path d="M40 20l-6 18-10 6 6-18 10-6z"/></svg></div>
           <h3>Orientierung</h3>
           <p>Notdienste, Seelsorge, Tierhilfe, Mobilität, öffentliche Hinweise. Alles an einem öffentlichen digitalen Ort.</p>
         </article>
@@ -589,7 +604,7 @@
 <footer>
   <div class="container footer-grid">
     <div>
-      <strong>Erschaffen wir den Bürgerplatz gemeinsam:</strong><br>
+      <strong>Kontakt</strong><br>
       JD Koehler<br>
       Boldixumerstrasse 30<br>
       25938 Wyk auf Föhr<br>
